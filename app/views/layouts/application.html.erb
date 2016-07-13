@@ -1,14 +1,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-  <title>Note | Online Notebook Application</title>
+  <title>NoteTask| Online Notebook Application</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
   <header>
-    
+    <div class="header_inner">
+      <%= link_to image_tag( 'logo.jpg'), root_path, id: "logo" %>
+      
+      <nav>
         <% if user_signed_in? %>
           <%= link_to "New Note", new_note_path %>
           <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>

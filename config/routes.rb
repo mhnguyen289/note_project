@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   devise_for :users
 
   get 'welcome/index'
-  resources :notes, only: [:index, :new, :edit, :show]
-  resources :users, only: [:index, :new, :edit, :show, :update]
+  resources :notes
+  resources :users
 
   authenticated :user do
   	root 'notes#index', as: "authenticated_root"

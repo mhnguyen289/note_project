@@ -1,12 +1,13 @@
 class NotebooksController < ApplicationController
 
-	before_action :find_notbook, only [:show, :edit, :update, :destroy]
+	before_action :find_notbook, only: [:show, :edit, :update, :destroy]
 
 	def index
 		@notes = Note.where(user_id: current_user)
 	end
 
 	def show
+		@notebook = Notebook.all
 	end
 
 	def new
@@ -40,6 +41,7 @@ class NotebooksController < ApplicationController
 	def find_notbook
 		@notebook = Notebook.find(params[:id])
 	end	
+end
 
 
 end

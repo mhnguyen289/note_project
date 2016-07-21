@@ -1,27 +1,67 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
-<head>
-  <title>DOT.NOTE| Online Notebook Application</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-  <header>
-    <div class="header_inner">
-      <%= link_to image_tag( 'logo.jpg'), root_path, id: "logo" %>
+  <head>
+    <title>DOT.NOTE| Online Notebook Application</title>
+
+      <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+      <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+      <%= csrf_meta_tags %>
+
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+    <header>
+      <div class="header_inner">
+        <%= link_to image_tag( 'logo.jpg'), root_path, id: "logo" %>
+        <nav>    
+          <% if user_signed_in? %>
+
+
+        <!-- what I wanted the jquery be used on-->
+
+   <div class="container">
+    <div class="btn-group">
+      <a class="btn btn-default dropdown-toggle btn-blog " data-toggle="dropdown" href="#" id="dropdownMenu1" style="width:200px;"><span class="selection pull-left">Select an option </span> 
+        <span class="pull-right glyphiconglyphicon-chevron-down caret" style="float:right;margin-top:10px;"></span></a>
+
+       <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+         <li><a href="#" class="" data-value=1><p> HER Can you write extra text or <b>HTLM</b></p> <h4> <span class="glyphicon glyphicon-plane"></span>  <span> Your Option 1</span> </h4></a>  </li>
+         <li><a href="#" class="" data-value=2><p> HER Can you write extra text or <i>HTLM</i> or some long long long long long long long long long long text </p><h4> <span class="glyphicon glyphicon-briefcase"></span> <span>Your Option 2</span>  </h4></a>
+          </li>
+            <li class="divider"></li>
+              <li><a href="#" class="" data-value=3><p> HER Can you write extra text or <b>HTLM</b> or some </p><h4> <span class="glyphicon glyphicon-heart text-danger"></span> <span>Your Option 3</span>  </h4></a>
+           </li>
+          </ul>
+        </div>
+      </div>
+
+
+<script>
+  $(".dropdown-menu li a").click(function(){
+  var selText = $(this).children("h4").html();
+
+
+ $(this).parent('li').siblings().removeClass('active');
+    $('#vl').val($(this).attr('data-value'));
+  $(this).parents('.btn-group').find('.selection').html(selText);
+  $(this).parents('li').addClass("active");
+});
+</script>
       
-      <nav>
-        <% if user_signed_in? %>
-          <%= link_to "New Note", new_note_path %>
-          <%= link_to "Profile", user_path(current_user) %>
-          <%= link_to('Edit Your Profile', edit_user_path(current_user)) %>
-          <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+        <%= link_to "New Note", new_note_path %>
+        <%= link_to "Profile", user_path(current_user) %>
+        <%= link_to('Edit Your Profile', edit_user_path(current_user)) %>
+        <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
         <% else %>
           <%= link_to "Log In", new_user_session_path %>
         <% end %>
       </nav>
-    </div>
+      </div>
   </header>
   <p class="notice">
     <%= notice %>
@@ -32,3 +72,6 @@
   <%= yield %>
 </body>
 </html>
+
+
+

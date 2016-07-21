@@ -1,5 +1,17 @@
 <%= simple_form_for @note do |f| %>
-  <%= f.input :title %>
-  <%= f.input :content %>
-  <%= f.button :submit, class: "button" %>
-<% end %>
+  <%= f.input :title, placeholder: 'Ex: Weekly team update' %> 
+  <%= f.input :content, placeholder:
+
+  			 'AGENDA
+
+- Introducing Monica, new marketing manager
+- Strategy for next launch
+
+SUMMARY
+
+- Monica will be doing PR for desktop products
+- Launch date 5/1/16
+    - Marketing press release goes out 4/30
+'%>
+  			<%= f.button :submit, class: "button" %>
+		<% end %>

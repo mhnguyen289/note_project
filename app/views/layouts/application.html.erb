@@ -1,10 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
   <head>
     <title>DOT.NOTE| Online Notebook Application</title>
 
       <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-      <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+      
       <%= csrf_meta_tags %>
 
 <meta charset="utf-8">
@@ -24,40 +23,34 @@
 
         <!-- what I wanted the jquery be used on-->
 
-   <div class="container">
-    <div class="btn-group">
-      <a class="btn btn-default dropdown-toggle btn-blog " data-toggle="dropdown" href="#" id="dropdownMenu1" style="width:200px;"><span class="selection pull-left">Select an option </span> 
-        <span class="pull-right glyphiconglyphicon-chevron-down caret" style="float:right;margin-top:10px;"></span></a>
 
-       <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-         <li><a href="#" class="" data-value=1><p> HER Can you write extra text or <b>HTLM</b></p> <h4> <span class="glyphicon glyphicon-plane"></span>  <span> Your Option 1</span> </h4></a>  </li>
-         <li><a href="#" class="" data-value=2><p> HER Can you write extra text or <i>HTLM</i> or some long long long long long long long long long long text </p><h4> <span class="glyphicon glyphicon-briefcase"></span> <span>Your Option 2</span>  </h4></a>
-          </li>
+
+          <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"style="width:200px;color: #f5f5f5;background-color: #2B2E2E ;">
+            
+            <span class="caret"></span><%= link_to @notebook.first.title %>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="width:200px;background-color: #2B2E2E">
+          <a href="#" class="" data-value=2><h4> <%= link_to "Create Notebook", new_notebook_path %></a></h4>
             <li class="divider"></li>
-              <li><a href="#" class="" data-value=3><p> HER Can you write extra text or <b>HTLM</b> or some </p><h4> <span class="glyphicon glyphicon-heart text-danger"></span> <span>Your Option 3</span>  </h4></a>
-           </li>
+          <% @notebook.each do |notebook| %>
+            <li><a href="#" data-value=<%= link_to notebook.title%> </a></li>
+            <% end %>
           </ul>
-        </div>
-      </div>
-
+        
 
 <script>
-  $(".dropdown-menu li a").click(function(){
-  var selText = $(this).children("h4").html();
-
-
- $(this).parent('li').siblings().removeClass('active');
-    $('#vl').val($(this).attr('data-value'));
-  $(this).parents('.btn-group').find('.selection').html(selText);
-  $(this).parents('li').addClass("active");
+$(".dropdown-menu li a").click(function(){
+  $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
+  $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
 });
 </script>
       
         <%= link_to "New Note", new_note_path %>
         <%= link_to "Profile", user_path(current_user) %>
         <%= link_to('Edit Your Profile', edit_user_path(current_user)) %>
-        <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
-        <% else %>
+        <%= link_to('Log Out', destroy_user_session_path, :method => :delete) %>
+         <% else %>
           <%= link_to "Log In", new_user_session_path %>
         <% end %>
       </nav>

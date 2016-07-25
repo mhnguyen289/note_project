@@ -6,23 +6,31 @@ class NotesController < ApplicationController
 	end
 
 	def show
+		@notebook = Notebook.all
 	end
 
 	def new
+
+		@notebook = Notebook.all
 		@note = current_user.notes.build
+
 	end
 
 	def create
 		@note = current_user.notes.build(note_params)
 
-		if @note.save
+		if @note.valid?
+			@note.save
 			redirect_to @note
 		else
 			render 'new'
 		end
 	end
 
+	
+
 	def edit
+		@notebook = Notebook.all
 	end
 
 	def update

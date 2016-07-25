@@ -11,13 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160721015500) do
+ActiveRecord::Schema.define(version: 20160725195925) do
 
   create_table "notebooks", force: :cascade do |t|
-    t.integer "note_id"
-    t.integer "user_id"
     t.string  "title"
-    t.integer "notebook_id"
+    t.integer "user_id"
   end
 
   create_table "notes", force: :cascade do |t|
@@ -42,8 +40,6 @@ ActiveRecord::Schema.define(version: 20160721015500) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.string   "provider"
-    t.string   "uid"
     t.string   "username"
     t.integer  "age"
     t.string   "hometown"

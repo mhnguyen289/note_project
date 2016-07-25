@@ -3,26 +3,33 @@ class NotebooksController < ApplicationController
 	before_action :find_notbook, only: [:show, :edit, :update, :destroy]
 
 	def index
-		@notes = Note.where(user_id: current_user)
+		@notebooks = Notebook.all
+		@notebook = Notebook.first
 	end
 
 	def show
+		@notebooks = Notebook.find(params[:id])
 		@notebook = Notebook.all
+			redirect_to new_note_path
+		
 	end
 
 	def new
-		@note = current_user.notes.build
+		@notebooks = Notebook.new
+		@notebook = Notebook.all
+
 	end
 
 	def create
-		@note = current_user.notes.build(notebook_params)
+		@notebook = Notebook.create(notebook_params)
 
-		if @notebook.save
+		if @notebook.valid?
+			@notebook.save
 			redirect_to @notebook
 		else
-			render 'new'
+			render :new
 		end
-	end
+	end	
 
 	def edit
 	end
@@ -36,7 +43,8 @@ class NotebooksController < ApplicationController
 	private
 
 	def notebook_params
-		params.require(:destination)
+		params.require(:notebook).permit(:note, :title)
+	end
 
 	def find_notbook
 		@notebook = Notebook.find(params[:id])
@@ -44,4 +52,4 @@ class NotebooksController < ApplicationController
 end
 
 
-end
+

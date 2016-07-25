@@ -28,6 +28,7 @@ gem 'simple_form'
 gem 'devise'
 gem 'sprockets-rails', :require => 'sprockets/railtie'
 gem 'omniauth-facebook'
+gem 'pry'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

@@ -6,6 +6,5 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 notebooks = Notebook.create(
-	[{notebook_id: 1, title: 'Things to be done today'},
-	{notebook_id: 2, title: 'Books to read'}])
+	[{title: 'Sample Notebook'}, {title: 'Books to read'}, {title: 'My Recipes'}])
 

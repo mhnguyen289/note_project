@@ -11,6 +11,7 @@ class NotebooksController < ApplicationController
 		@notebooks = Notebook.find(params[:id])
 		@notebook = Notebook.all
 			redirect_to new_note_path
+
 		
 	end
 
@@ -21,7 +22,8 @@ class NotebooksController < ApplicationController
 	end
 
 	def create
-		@notebook = Notebook.create(notebook_params)
+		@notebook = notebook.notes.build(params[:id])
+		
 
 		if @notebook.valid?
 			@notebook.save

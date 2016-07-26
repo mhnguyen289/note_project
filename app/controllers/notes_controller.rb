@@ -11,8 +11,10 @@ class NotesController < ApplicationController
 
 	def new
 
-		@notebook = Notebook.all
+		@notebooks = Notebook.all
 		@note = current_user.notes.build
+		
+		
 
 	end
 
@@ -53,7 +55,7 @@ class NotesController < ApplicationController
 	end
 
 	def note_params
-		params.require(:note).permit(:title, :content)
+		params.require(:note).permit(:title, :content, :notebook_id)
 	end
 
 

@@ -18,7 +18,7 @@
       <div class="header_inner">
         <%= link_to image_tag( 'logo.jpg'), root_path, id: "logo" %>
         <nav>    
-          <% if user_signed_in? %>
+         
 
 
         <!-- what I wanted the jquery be used on-->
@@ -28,13 +28,13 @@
           <div class="dropdown">
           <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"style="width:200px;color: #f5f5f5;background-color: #2B2E2E ;">
             
-            <span class="caret"></span><%= link_to @notebook.first.title %>
+            <span class="caret"></span><%= link_to @notebooks.first.title %>
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="width:200px;background-color: #2B2E2E">
           <a href="#" class="" data-value=2><h4> <%= link_to "Create Notebook", new_notebook_path %></a></h4>
             <li class="divider"></li>
-          <% @notebook.each do |notebook| %>
-            <li><a href="#" data-value=<%= link_to notebook.title%> </a></li>
+          <% @notebooks.each do |notebook| %>
+            <li><a href="#" data-value=<%= link_to notebook.title, notebook_path(notebook)%> </a></li>
             <% end %>
           </ul>
         
@@ -45,8 +45,9 @@ $(".dropdown-menu li a").click(function(){
   $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
 });
 </script>
-      
+       <% if user_signed_in? %>
         <%= link_to "New Note", new_note_path %>
+        <!-- link_to "Notebooks", notebook_path  -->
         <%= link_to "Profile", user_path(current_user) %>
         <%= link_to('Edit Your Profile', edit_user_path(current_user)) %>
         <%= link_to('Log Out', destroy_user_session_path, :method => :delete) %>

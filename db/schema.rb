@@ -11,11 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160725195925) do
+ActiveRecord::Schema.define(version: 20160726100838) do
 
   create_table "notebooks", force: :cascade do |t|
     t.string  "title"
     t.integer "user_id"
+    t.integer "notebook_id"
   end
 
   create_table "notes", force: :cascade do |t|
@@ -25,6 +26,7 @@ ActiveRecord::Schema.define(version: 20160725195925) do
     t.datetime "updated_at",  null: false
     t.integer  "user_id"
     t.integer  "notebook_id"
+    t.integer  "note_id"
   end
 
   create_table "users", force: :cascade do |t|

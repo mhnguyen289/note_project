@@ -1,13 +1,6 @@
 <div class="wrapper_with_padding">
 	<div id="note_show">
-		<%= @notes.each do |note| %>
-		<%= note.title %>
-		<% end %>
-			<%= @notes.each do |note| %>
-			<p><%= note.content%></p>
-<% end %>
-			<div class= "buttons">
+		<%= simple_format(@note.title) %>
+		<%= simple_format(@note.content) %>
 
-			<%= link_to "Edit", edit_note_path(@notes), class: "button" %>
-			<%= link_to "Delete", note_path(@notes), method: :delete, data: { confirm: "Are you sure?" }, class: "button" %>
 

@@ -8,10 +8,11 @@ class NotebooksController < ApplicationController
 	end
 
 	def show
-		@note = Note.find(params[:id])
+		
 		@notes = Note.all
 		@notebook = Notebook.find(params[:id])
 		@notebooks = Notebook.all
+		#@note = Note.find(params[:id])
 		if @notebook
 			@notebook.save
 			render :show
@@ -56,7 +57,7 @@ class NotebooksController < ApplicationController
 		params.require(:notebook).permit(:note, :title)
 	end
 
-	def find_notbook
+	def find_notebook
 		@notebook = Notebook.find(params[:id])
 	end	
 end

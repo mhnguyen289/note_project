@@ -1,5 +1,6 @@
 class NotesController < ApplicationController
 	before_action :find_note, only: [:show, :edit, :destroy, :update]
+	
 
 	def index
 		@notes = Note.where(user_id: current_user)
@@ -7,14 +8,13 @@ class NotesController < ApplicationController
 
 	def show
 		@notebooks = Notebook.all
-		@notes = Note.all
-		@note = Note.find_by(note_params)
+		@note = Note.find_by(params[:id])
 	end
 
 	def new
 		@notebook = Notebook.find_by(params[:id])
 		@notebooks = Notebook.all
-		@note = current_user.notes.build
+		@note = Note.find_by(params[:id])
 		@notes = Note.all
 		
 		

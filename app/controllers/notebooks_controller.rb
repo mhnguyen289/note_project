@@ -1,4 +1,5 @@
 class NotebooksController < ApplicationController
+		
 
 	before_action :find_notebook, only: [:show, :edit, :update, :destroy]
 

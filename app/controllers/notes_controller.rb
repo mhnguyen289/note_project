@@ -10,9 +10,10 @@ class NotesController < ApplicationController
 	end
 
 	def new
-
+		@notebook = Notebook.find_by(params[:id])
 		@notebooks = Notebook.all
 		@note = current_user.notes.build
+		@notes = Note.all
 		
 		
 

@@ -20,7 +20,7 @@
         <nav>    
          
 
-
+  <% if user_signed_in? %>
         <!-- what I wanted the jquery be used on-->
 
 
@@ -30,13 +30,13 @@
             
             <span class="caret"></span> 
             
-            <%= link_to @notebooks.first.title %>
+          Notebooks
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="width:200px;background-color: #2B2E2E">
           <a href="#" class="" data-value=2><h4> <%= link_to "Create Notebook", new_notebook_path %></a></h4>
             <li class="divider"></li>
-          <% @notebooks.each do |notebook| %>
-            <li><a href="#" data-value=3><h4> <%= link_to notebook.title, note_path(@notes) %></h4> </a></li>
+           <% @notebooks.each do |notebook| %>
+            <li><a href="#" data-value=3><h4> <%=link_to   notebook.title, note_path(@notes) %></h4> </a></li>
             <% end %>
           
           </ul>
@@ -48,7 +48,7 @@ $(".dropdown-menu li a").click(function(){
   $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
 });
 </script>
-       <% if user_signed_in? %>
+     
         <%= link_to "New Note", new_note_path %>
         <%= link_to "Profile", user_path(current_user) %>
         <%= link_to('Edit Your Profile', edit_user_path(current_user)) %>

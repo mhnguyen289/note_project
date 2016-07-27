@@ -1,5 +1,5 @@
 class NotebooksController < ApplicationController
-		
+
 
 	before_action :find_notebook, only: [:show, :edit, :update, :destroy]
 
@@ -13,7 +13,7 @@ class NotebooksController < ApplicationController
 		@notes = Note.all
 		@notebook = Notebook.find(params[:id])
 		@notebooks = Notebook.all
-		#@note = Note.find(params[:id])
+		@note = Note.find(params[:id])
 		if @notebook
 			@notebook.save
 			render :show

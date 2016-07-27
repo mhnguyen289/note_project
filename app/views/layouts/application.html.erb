@@ -38,8 +38,8 @@
         
             <!-- <li><link_to "option 1", notebook_path%></li> -->
         
-         <li><a href="#">
-           <% @notebooks.each do |notebook| %></a></li>
+         <li>
+           <% @notebooks.each do |notebook| %></li>
              <li><%=link_to notebook.title, notebook_path(notebook) %>
               <% end %>
              </li>

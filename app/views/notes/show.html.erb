@@ -1,7 +1,9 @@
 <div class="wrapper_with_padding">
   <div id="note_show">
     <h1 class="title">
-      <%= @note.title %>
+    <% @notes.each do |note| %>
+      <%= note.title %>
+      <%end%>
     </h1>
     <p>
       <%= simple_format(@note.content) %>

@@ -10,10 +10,10 @@ class NotebooksController < ApplicationController
 
 	def show
 		
-		# @notes = Note.all
+		
 		@note = Note.find_by(params[:id])
-		# @notebook = Notebook.find(params[:id])
-		@notebooks = Notebook.all
+		@notebook = Notebook.find(params[:id])
+		@notebooks = @notebook.notes.all
 		
 		end
 
@@ -33,9 +33,9 @@ class NotebooksController < ApplicationController
 
 		if @notebook.valid?
 			@notebook.save
-			redirect_to notebook_path
+			redirect_to new_note_path
 		else
-			redirect_to note_path
+			render :edit
 		end
 	end	
 

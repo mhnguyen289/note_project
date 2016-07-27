@@ -22,7 +22,7 @@ class UsersController < ApplicationController
 
   def show 
     @user = User.find(params[:id])
-    @notebook = Notebook.all
+    @notebooks = Notebook.all
   end 
 
  private

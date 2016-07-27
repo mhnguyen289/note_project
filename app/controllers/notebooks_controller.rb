@@ -10,15 +10,12 @@ class NotebooksController < ApplicationController
 
 	def show
 		
-		
+		@notes = @notebook.notes.all
 		@note = Note.find_by(params[:id])
-		@notebook = Notebook.find(params[:id])
+		@notebook = Notebook.find_by(params[:id])
 		@notebooks = @notebook.notes.all
 		
 		end
-
-		
-	
 
 	def new
 		@notebook = current_user.notebooks.build
@@ -29,8 +26,6 @@ class NotebooksController < ApplicationController
 	def create
 		@notebooks = Notebook.all
 		@notebook = Notebook.create(notebook_params)
-		
-
 		if @notebook.valid?
 			@notebook.save
 			redirect_to new_note_path
@@ -55,7 +50,7 @@ class NotebooksController < ApplicationController
 	end
 
 	def find_notebook
-		@notebook = Notebook.find(params[:id])
+		@notebook = Notebook.find_by(params[:id])
 	end	
 end
 

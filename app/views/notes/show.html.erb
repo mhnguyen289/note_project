@@ -1,14 +1,15 @@
 <div class="wrapper_with_padding">
   <div id="note_show">
     <h1 class="title">
-    <% @notes.each do |note| %>
-      <%= note.title %>
-      <%end%>
+    
+      <%= @note.title %>
+      
     </h1>
     <p>
       <%= simple_format(@note.content) %>
     </p>
     <div class="buttons">
+       <%= link_to "Back", notebook_path(@notebook), class: "button" %>
       <%= link_to "Edit", edit_note_path(@note), class: "button" %>
       <%= link_to "Delete", note_path(@note), method: :delete, data: { confirm: "Are you sure?" }, class: "button" %>
     </div>

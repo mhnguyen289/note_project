@@ -26,11 +26,10 @@ class NotesController < ApplicationController
 
 	def create
 		@notebooks = Notebook.all
-		@notebook = Notebook.find_by(params[:id])
+		@notebook = Notebook.find(note_params[:notebook_id])
 		@notes = @notebook.notes.all
 		@note = @notebook.notes.build(note_params)
-		if @note.valid?
-			@note.save
+		if @note.save
 			redirect_to notebook_path(@notebook)
 		else
 			render :new
@@ -52,8 +51,11 @@ class NotesController < ApplicationController
 	end
 
 	def destroy
-		@note.destroy
-		redirect_to note_path
+		if @note.destroy
+			redirect_to notebook_path
+		else
+			render :show
+		end
 	end
 
 	private

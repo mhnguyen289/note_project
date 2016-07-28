@@ -10,12 +10,12 @@
     </p>
     <div class="buttons">
        <%= link_to "Back", notebook_path(@notebook), class: "button" %>
-      <%= link_to "Edit", edit_note_path(@note), class: "button" %>
+      <%= link_to "Edit", edit_notebook_note_path(@note), class: "button" %>
 
 
 
 
-      <%= link_to "Delete", note_path(@note), method: :delete, data: { confirm: "Are you sure?" }, class: "button" %>
+      <%= link_to "Delete", notebook_note_path(@note), method: :delete, data: { confirm: "Are you sure?" }, class: "button" %>
     </div>
   </div>
 </div>

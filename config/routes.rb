@@ -6,7 +6,7 @@ end
 
   get 'welcome/index'
   resources :users 
-  resources :notes
+  
     
   resources :notebooks do
     resources :notes

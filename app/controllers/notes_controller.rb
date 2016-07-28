@@ -26,7 +26,7 @@ class NotesController < ApplicationController
 
 	def create
 		@notebooks = Notebook.all
-		@notebook = Notebook.find(note_params[:notebook_id])
+		@notebook = Notebook.find_by(params[:id])
 		@notes = @notebook.notes.all
 		@note = @notebook.notes.build(note_params)
 		if @note.save

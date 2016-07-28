@@ -6,9 +6,11 @@ end
 
   get 'welcome/index'
   resources :users 
-
   resources :notes
-  resources :notebooks
+    
+  resources :notebooks do
+    resources :notes
+  end
 
   authenticated :user do
   	root 'notes#new', as: "authenticated_root"

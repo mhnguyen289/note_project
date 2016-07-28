@@ -1,0 +1,2 @@
+class NoteTitlesController < ApplicationController
+end

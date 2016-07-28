@@ -29,9 +29,9 @@ class NotesController < ApplicationController
 
 		@notebooks = Notebook.all
 		@notebook = Notebook.find_by(params[:id])
-		@notebook = Notebook.find_by(params[:notebook_id])
+		# @notebook = Notebook.find_by(params[:notebook_id])
 		@notes = @notebook.notes.all
-		@note = @notebook.notes.build(note_params)#(notebook_note_path[:notebook_id])
+		@note = @notebook.notes.build(note_params)
 		if @note.save
 			redirect_to notebook_path(@notebook)
 		else
@@ -47,7 +47,7 @@ class NotesController < ApplicationController
 
 	def update
 		if @note.update(note_params)
-			redirect_to notebook_note_path
+			redirect_to note_path
 		else
 			render 'edit'
 		end

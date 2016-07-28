@@ -11,23 +11,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160726100618) do
+ActiveRecord::Schema.define(version: 20160728205550) do
+
+  create_table "note_notebooks", force: :cascade do |t|
+    t.integer "note_id"
+    t.integer "notebook_id"
+  end
+
+  add_index "note_notebooks", ["note_id"], name: "index_note_notebooks_on_note_id"
+  add_index "note_notebooks", ["notebook_id"], name: "index_note_notebooks_on_notebook_id"
 
   create_table "notebooks", force: :cascade do |t|
     t.string  "title"
-    t.integer "user_id"
-    t.integer "notebook_id"
+    t.integer "notebooks_id"
+    t.integer "note_id"
   end
+
+  add_index "notebooks", ["note_id"], name: "index_notebooks_on_note_id"
+  add_index "notebooks", ["notebooks_id"], name: "index_notebooks_on_notebooks_id"
 
   create_table "notes", force: :cascade do |t|
     t.string   "title"
     t.text     "content"
+    t.integer  "notes_id"
+    t.integer  "notebook_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "user_id"
-    t.integer  "notebook_id"
-    t.integer  "note_id"
   end
+
+  add_index "notes", ["notebook_id"], name: "index_notes_on_notebook_id"
+  add_index "notes", ["notes_id"], name: "index_notes_on_notes_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

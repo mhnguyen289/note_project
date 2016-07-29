@@ -4,18 +4,18 @@ Rails.application.routes.draw do
   	 get '/users/sign_out' => 'devise/sessions#destroy' 
 end
 
-  get 'welcome/index'
-  resources :users 
-  resources :notebooks 
-  resources :notes
-    
-
   
+  resources :notebooks do
+    resources :notes
+end    
 
+get 'welcome/index'
+  resources :users 
+  resources :notes
+  
   authenticated :user do
   	root 'notes#new', as: "authenticated_root"
   end
 
   root 'welcome#index'
 end
-

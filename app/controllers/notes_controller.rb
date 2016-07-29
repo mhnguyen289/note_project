@@ -17,15 +17,16 @@ class NotesController < ApplicationController
 	def new
 		@notebook = Notebook.find_by(params[:id])
 		@notebooks = Notebook.all
-		@note = @notebook.notes.build
+		@note = current_user.notes.build
 		@notes = @notebook.notes.all
 	end
 
 	def create
-		@notebook = Notebook.find_by(params[:id])
+		
+		@notebook = Notebook.find_by(params[:note][:notebook_id])
 		@note = @notebook.notes.build(note_params)
 		if @note.save
-			redirect_to note_path(@note)
+			redirect_to notebook_path(@notebook)
 		else
 			render :new
 		end

@@ -4,10 +4,7 @@ Rails.application.routes.draw do
   	 get '/users/sign_out' => 'devise/sessions#destroy' 
 end
   
-  resources :notebooks do
-    resources :notes, only: [:show]
-end    
-
+  resources :notebooks 
 get 'welcome/index'
   resources :users 
   resources :notes

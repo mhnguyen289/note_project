@@ -18,7 +18,7 @@ class NotebooksController < ApplicationController
 		end
 
 	def new
-		@notebook = current_user.notebooks.build
+		@notebook = current_user.notes.build
 		@notebooks = Notebook.all
 
 	end
@@ -26,8 +26,7 @@ class NotebooksController < ApplicationController
 	def create
 		@notebooks = Notebook.all
 		@notebook = Notebook.create(notebook_params)
-		if @notebook.valid?
-			@notebook.save
+		if @notebook.save
 			redirect_to new_note_path
 		else
 			render :edit

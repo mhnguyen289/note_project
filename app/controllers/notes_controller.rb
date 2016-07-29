@@ -8,14 +8,13 @@ class NotesController < ApplicationController
 
 	def show
 		@notebooks = Notebook.all
-		@note = Note.find_by(params[:id])
+		@note = Note.find(params[:id])
 		@notebook = Notebook.find_by(params[:id])
 		@notes = @notebook.notes.all
 		
 	end
 
 	def new
-		binding.pry
 		@notebook = Notebook.find_by(params[:id])
 		@notebooks = Notebook.all
 		@note = @notebook.notes.build
@@ -23,10 +22,10 @@ class NotesController < ApplicationController
 	end
 
 	def create
-		@notebook = Notebook.find_by(params[:notebook_id])
+		@notebook = Notebook.find_by(params[:id])
 		@note = @notebook.notes.build(note_params)
 		if @note.save
-			redirect_to notebook_note_path(@note)
+			redirect_to note_path(@note)
 		else
 			render :new
 		end

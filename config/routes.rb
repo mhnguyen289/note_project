@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 end
   
   resources :notebooks do
-    resources :notes
+    resources :notes, only: [:show]
 end    
 
 get 'welcome/index'

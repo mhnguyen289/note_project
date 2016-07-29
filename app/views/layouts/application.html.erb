@@ -36,15 +36,16 @@
         
           <li><h4> <%= link_to "Create Notebook", new_notebook_path %></h4><li>
         
-            <!-- <li><link_to "option 1", notebook_path%></li> -->
+            
         
-         <li>
-           <% @notebooks.each do |notebook| %></li>
-             <li><%=link_to notebook.title, notebook_path(notebook) %>
-              <% end %>
-             </li>
+       <%= @note_find = @notebooks.map do |notebook| %>
+             <%= notebook.title%>
+          <%end%>
+                 <%= notenote = @note_find.uniq%>
+
+           <li><h4><%=link_to notenote, notebook_path(@notebooks)%></h4></li>
+
           </ul>
-        
 
 <script>
 $(".dropdown-menu li ").click(function(){

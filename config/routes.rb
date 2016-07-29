@@ -3,14 +3,14 @@ Rails.application.routes.draw do
    devise_scope :user do
   	 get '/users/sign_out' => 'devise/sessions#destroy' 
 end
+  get 'welcome/index'
   
   resources :notebooks 
-get 'welcome/index'
   resources :users 
   resources :notes
   
   authenticated :user do
-  	root 'notes#new', as: "authenticated_root"
+  	root 'notes#index', as: "authenticated_root"
   end
 
   root 'welcome#index'

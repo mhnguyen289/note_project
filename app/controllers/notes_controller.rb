@@ -4,6 +4,9 @@ class NotesController < ApplicationController
 
 	def index
 		@notes = Note.where(user_id: current_user)
+		@notebook = Notebook.find_by(params[:id])
+		@notebooks = Notebook.all
+		@note = current_user.notes.build
 	end
 
 	def show

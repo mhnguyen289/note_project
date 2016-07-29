@@ -18,18 +18,19 @@ class NotebooksController < ApplicationController
 		end
 
 	def new
-		@notebook = current_user.notes.build
+		@notebook = Notebook.new
 		@notebooks = Notebook.all
 
 	end
 
 	def create
-		@notebooks = Notebook.all
+		
+		@notebook = Notebook.find_by(params[:id])
 		@notebook = Notebook.create(notebook_params)
 		if @notebook.save
-			redirect_to new_note_path
+			render :show
 		else
-			render :edit
+			render :new
 		end
 	end	
 

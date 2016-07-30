@@ -38,12 +38,13 @@
         
             
         
-       <%= @note_find = @notebooks.map do |notebook| %>
-             <%= notebook.title%>
-          <%end%>
-                 <%= notenote = @note_find.uniq%>
 
-           <li><h4><%=link_to notenote, notebook_path(@notebooks)%></h4></li>
+          <%= @titles = Notebook.all_notebook_titles%>
+            <% @titles.each do |titles| %>
+          <li><h4>     <%=link_to titles, notebook_path(@notebook)  %>>
+           <% end %> </h4></li>
+       
+
 
           </ul>
 

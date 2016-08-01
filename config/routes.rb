@@ -14,7 +14,7 @@ end
   
   
   authenticated :user do
-  	root 'notebooks#index', as: "authenticated_root"
+  	root 'notes#new', as: "authenticated_root"
   end
 
 

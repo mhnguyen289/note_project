@@ -11,7 +11,7 @@ class NotebooksController < ApplicationController
 	def show
 		
 		@notebook = Notebook.find_by(params[:id])
-		@notebooks = @notebook.notes.all
+		@notebooks = Notebook.all
 
 		
 		end

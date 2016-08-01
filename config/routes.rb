@@ -5,10 +5,12 @@ Rails.application.routes.draw do
 end
   get 'welcome/index'
   
-  resources :notebooks do
-    resources :notes
-  end
+  # resources :notebooks do
+  #   resources :notes
+  # end
   resources :users 
+  resources :notes
+  resources :notebooks
   
   
   authenticated :user do

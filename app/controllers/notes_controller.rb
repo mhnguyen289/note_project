@@ -4,34 +4,30 @@ class NotesController < ApplicationController
 
 	def index
 		@notes = Note.where(user_id: current_user)
-		@notebook = Notebook.find_by(params[:id])
-		@notebooks = Notebook.all
-		@note = current_user.notes.build
+		
 	end
 
 	def show
 		@notebooks = Notebook.all
-		@note = Note.find_by(params[:id])
-		@notebook = Notebook.find_by(params[:id])
-		@notes = @notebook.notes.all
+		
 		
 	end
 
 	def new
-		@notebook = Notebook.find_by(params[:id])
 		@notebooks = Notebook.all
-		@note = Note.find_by(params[:id])
-		@notes = @notebook.notes.all
+		@note = current_user.notes.build
+		@notebook = Notebook.new
 	end
 
 	def create
+		# raise params
+		@note = current_user.notes.build(note_params)
 
-		@notebook = Notebook.find_by(params[:note][:notebook_id])
-		@note = @notebook.notes.build(note_params)
-		if @note.save
-			redirect_to notebook_path(@notebook)
+		if @note.valid?
+			@note.save
+			redirect_to @note
 		else
-			render :new
+			render 'new'
 		end
 	end
 
@@ -65,7 +61,7 @@ class NotesController < ApplicationController
 	end
 
 	def note_params
-		params.require(:note).permit(:title, :content, :notebook_id)
+		params.require(:note).permit(:title, :content, :notebook_id, notebook_attributes: [:title])
 	end
 
 

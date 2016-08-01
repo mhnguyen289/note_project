@@ -1,18 +1,15 @@
-
-<%= simple_form_for @note do |f| %><br>
-	
-<h4>Choose a notebook: <%= f.collection_select(:id, @notebooks.order('title ASC').uniq, :note_id, :title)%></h4>
-	
+<%= simple_form_for @note do |f| %>
   <%= f.input :title, placeholder: 'Ex: Weekly team update' %> 
-
-  
-  
-  <!-- f.input :notebook, :label => 'Choose a notebook', placeholder: 'New Notebook'  -->
-  
-
+  <div class="field">
+  <%=f.label "Choose a notebook"%>
+  <%= f.collection_select(:notebook_id, @notebooks.order('title ASC'), :id, :title, {include_blank: true})%>
+  <%=f.fields_for :notebook, @notebook do |notebook_field|%>
+    <%= notebook_field.text_field :title, placeholder: 'New Notebook'%>
+  <%end%>
+</div>
   <%= f.input :content, placeholder:
 
-  			 'AGENDA
+         'AGENDA
 
 - Introducing Monica, new marketing manager
 - Strategy for next launch
@@ -23,7 +20,5 @@ SUMMARY
 - Launch date 5/1/16
     - Marketing press release goes out 4/30
 '%>
-  			<%= f.button :submit, class: "button" %>
-		<% end %>
-
-		
+        <%= f.button :submit, class: "button" %>
+    <% end %>

@@ -1,7 +1,7 @@
 class NotebooksController < ApplicationController
 
 
-	before_action :find_notebook, only: [:show, :edit, :update, :destroy]
+	before_action :find_notebook, only: [ :edit, :update, :destroy]
 
 	def index
 		@notebooks = Notebook.all
@@ -10,8 +10,8 @@ class NotebooksController < ApplicationController
 
 	def show
 		
-		@notes = @notebook.notes.all
-		@note = Note.find_by(params[:id])
+		#@notes = @notebook.notes.all
+		#@note = Note.find_by(params[:id])
 		@notebook = Notebook.find_by(params[:id])
 		@notebooks = @notebook.notes.all
 		
@@ -19,7 +19,7 @@ class NotebooksController < ApplicationController
 
 	def new
 
-		#@notebook =  Notebook.find_by(params[:id])
+		@notebook =  Notebook.find_by(params[:id])
 		@notebooks = Notebook.all.build
 
 	end
@@ -29,7 +29,7 @@ class NotebooksController < ApplicationController
 		@notebook = Notebook.find_by(params[:id])
 		@notebook = Notebook.create(notebook_params)
 		if @notebook.save
-			render :show
+			render :index
 		else
 			render :new
 		end
@@ -47,7 +47,7 @@ class NotebooksController < ApplicationController
 	private
 
 	def notebook_params
-		params.require(:notebook).permit(:note, :title)
+		params.require(:notebook).permit(:note, :title, :notebooks_id)
 	end
 
 	def find_notebook

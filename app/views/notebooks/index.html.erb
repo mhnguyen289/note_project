@@ -9,7 +9,7 @@
     <% Notebook.all.collect do |notebook| %>
     			<div class="note">
             <p class="title">
-    	<%= link_to notebook.title, notebook_path(@notebook) %>
+    	<%= link_to notebook.title, notebook_path(@notebooks) %>
     	    	</p>
     	    	
             </div>

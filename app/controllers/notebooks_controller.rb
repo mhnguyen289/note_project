@@ -5,7 +5,7 @@ class NotebooksController < ApplicationController
 
 	def index
 		@notebooks = Notebook.all
-		@notebook = Notebook.first
+		@notebook = Notebook.find_by(params[:id])
 	end
 
 	def show

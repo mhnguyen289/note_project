@@ -1,11 +1,11 @@
-
+<!-- 
   <h1> Welcome to DOT.NOTE!</h1>
     <h4>Here are your current Notebooks today:  </h4>
 
-<% @titles = Notebook.all_notebook_titles %>
-    <% @titles.each do |titles| %>
-    	<% link_to @titles.all, notebook_path(@notebooks) %>
-    	    <% end %>
+@titles = Notebook.all_notebook_titles 
+     @titles.each do |titles| 
+    	 link_to @titles, notebook_path(@notebooks) 
+    	     end --> 
 
 
 

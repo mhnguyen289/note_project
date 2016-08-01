@@ -20,7 +20,7 @@ class NotesController < ApplicationController
 	def new
 		@notebook = Notebook.find_by(params[:id])
 		@notebooks = Notebook.all
-		@note = Note.all.build
+		@note = Note.find_by(params[:id])
 		@notes = @notebook.notes.all
 	end
 

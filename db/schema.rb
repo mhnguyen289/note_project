@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20160728205550) do
 
   create_table "notebooks", force: :cascade do |t|
     t.string  "title"
+    t.text    "content"
     t.integer "note_id"
   end
 

@@ -12,21 +12,21 @@ class NotebooksController < ApplicationController
 		
 		#@notes = @notebook.notes.all
 		#@note = Note.find_by(params[:id])
-		@notebook = Notebook.find_by(params[:id])
+		@notebook = Notebook.find_by(params[:notebook_id])
 		@notebooks = @notebook.notes.all
 		
 		end
 
 	def new
 
-		@notebook =  Notebook.find_by(params[:id])
-		@notebooks = Notebook.all.build
+		@notebook =  Notebook.find_by(params[:notebook_id])
+		@notebooks = Notebook.all
 
 	end
 
 	def create
 		
-		@notebook = Notebook.find_by(params[:id])
+		@notebook = Notebook.find_by(params[:id][:title])
 		@notebook = Notebook.create(notebook_params)
 		if @notebook.save
 			render :index
@@ -47,7 +47,7 @@ class NotebooksController < ApplicationController
 	private
 
 	def notebook_params
-		params.require(:notebook).permit(:note, :title, :notebooks_id)
+		params.require(:notebook).permit(:title, :note_id)
 	end
 
 	def find_notebook

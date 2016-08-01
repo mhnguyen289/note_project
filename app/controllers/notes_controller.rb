@@ -20,12 +20,12 @@ class NotesController < ApplicationController
 	def new
 		@notebook = Notebook.find_by(params[:id])
 		@notebooks = Notebook.all
-		@note = current_user.notes.build
+		@note = Notebook.all.build
 		@notes = @notebook.notes.all
 	end
 
 	def create
-		
+
 		@notebook = Notebook.find_by(params[:note][:notebook_id])
 		@note = @notebook.notes.build(note_params)
 		if @note.save
@@ -60,7 +60,7 @@ class NotesController < ApplicationController
 	private
 
 	def find_note
-		@note = Note.find_by_id(params[:id])
+		@note = Note.find_by(params[:id])
 
 	end
 

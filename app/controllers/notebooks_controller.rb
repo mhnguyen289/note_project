@@ -18,8 +18,9 @@ class NotebooksController < ApplicationController
 		end
 
 	def new
-		@notebook = Notebook.new
-		@notebooks = Notebook.all
+
+		#@notebook =  Notebook.find_by(params[:id])
+		@notebooks = Notebook.all.build
 
 	end
 

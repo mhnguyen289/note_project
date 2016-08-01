@@ -38,11 +38,11 @@
         
             
         
-
-          <%= @titles = Notebook.all_notebook_titles%>
-            <% @titles.each do |titles| %>
-          <li><h4>     <%=link_to titles, notebook_path(@notebook)  %>>
-           <% end %> </h4></li>
+<!-- 
+           @titles = Notebook.all_notebook_titles
+             @titles.each do |titles|  -->
+          <li><h4>    <!--  @titles.all  --><!-- , notebook_path(@notebooks)   -->
+            </h4></li>
        
 
 
@@ -55,6 +55,7 @@ $(".dropdown-menu li ").click(function(){
 });
 </script>
      
+        <%= link_to "New Notebook", new_notebook_path %>    
         <%= link_to "New Note", new_note_path %>
         <%= link_to "Profile", user_path(current_user) %>
         <%= link_to('Edit Your Profile', edit_user_path(current_user)) %>

@@ -10,8 +10,13 @@ end
   resources :notes
   
   authenticated :user do
-  	root 'notes#index', as: "authenticated_root"
+  	root 'notebooks#index', as: "authenticated_root"
   end
+
+  resources :notebooks do
+    resources :notes
+  end
+
 
   root 'welcome#index'
 end

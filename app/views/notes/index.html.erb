@@ -1,5 +1,15 @@
-<div class="wrapper_with_padding">
-  <h1> Create notes and to-do's</h1>
-    <%= render "form" %>
-</div>
+
+  <h1> Welcome to DOT.NOTE!</h1>
+    <h4>Here are your current Notebooks today:  </h4>
+
+<% @titles = Notebook.all_notebook_titles %>
+    <% @titles.each do |titles| %>
+    	<% link_to @titles.all, notebook_path(@notebooks) %>
+    	    <% end %>
+
+
+
+
+			
+
 

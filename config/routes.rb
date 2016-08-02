@@ -17,6 +17,9 @@ end
   	root 'notes#new', as: "authenticated_root"
   end
 
+resources :notebooks do 
+  resources :notes, only: [:show]
+end
 
   root 'welcome#index'
 end

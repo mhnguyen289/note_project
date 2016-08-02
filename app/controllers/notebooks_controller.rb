@@ -4,14 +4,18 @@ class NotebooksController < ApplicationController
 	before_action :find_notebook, only: [:show, :edit, :update, :destroy]
 
 	def index
-		@notebooks = Notebook.all
+		
+		@notes = Note.all
+		@notebook = Notebook.find_by(params[:id])
+		@notebooks = @notebook.notes.all
+		#@notes = @notebooks.notes.all
 		@notebook = Notebook.first
 	end
 
 	def show
-		
-		@notebook = Notebook.find_by(params[:note_id])
-		@notebooks = Notebook.all
+		raise params.inspect
+		@notebook = Notebook.find(params[:note][:notebook_id])
+		@notebooks = @notebook.notes
 
 		
 		end
@@ -25,11 +29,11 @@ class NotebooksController < ApplicationController
 
 	def create
 		
-		#@notebook = Notebook.find_by(params[:id])
+		@notebook = Notebook.find_by(params[:id])
 		@notebook = Notebook.create(notebook_params)
 		if @notebook.valid?
 			@notebook.save
-			redirect_to @notebook
+			redirect_to notebooks_path
 		else
 			render :new
 		end
@@ -47,7 +51,7 @@ class NotebooksController < ApplicationController
 	private
 
 	def notebook_params
-		params.require(:notebook).permit(:title, :note)
+		params.require(:notebook).permit(:title, :note, :note_id)
 	end
 
 	def find_notebook

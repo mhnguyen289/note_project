@@ -6,10 +6,10 @@
   <div class="clearfix" id="notes">
 
 	
-    <% Notebook.all.collect do |notebook| %>
+    <% @notebooks.each do |notebook| %>
     			<div class="note">
             <p class="title">
-    	<%= link_to notebook.title, notebook_path(@notebook) %>
+    	<%= link_to @notebook, notebook_path(@notebook) %>
     	    	</p>
     	    	
             </div>

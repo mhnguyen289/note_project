@@ -10,7 +10,7 @@ class NotebooksController < ApplicationController
 
 	def show
 		
-		@notebook = Notebook.find_by(params[:id])
+		@notebook = Notebook.find_by(params[:note_id])
 		@notebooks = Notebook.all
 
 		
@@ -19,8 +19,8 @@ class NotebooksController < ApplicationController
 	def new
 
 		
-		@notebooks = Notebook.new
-		@notebook = Notebook.all
+		@notebook = Notebook.new
+		@notebooks = Notebook.all
 	end
 
 	def create

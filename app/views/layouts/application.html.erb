@@ -31,11 +31,11 @@
             <span class="caret"></span><%= link_to Notebook.first %>
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="width:200px;background-color: #2B2E2E">
-          <a href="#" class="" data-value=2><h4> <%= link_to "Create Notebook", new_notebook_path(@notebooks) %></a></h4>
+          <a href="#" class="" data-value=2><h4> <%= link_to "Create Notebook", new_notebook_path(@notebook) %></a></h4>
             <li class="divider"></li>
-          <% @notebooks.each do |notebook| %>
-            <li><%=link_to notebook_path(notebook), notebook_path(notebook)%></li>
-            <% end %>
+           <!-- @notebooks.each do |notebook| 
+            <li>link_to notebook_path(@notebook)</li>
+            end  -->
           </ul>
 <script>
 $(".dropdown-menu li ").click(function(){

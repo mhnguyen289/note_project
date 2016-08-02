@@ -11,23 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160728205550) do
-
-  create_table "note_notebooks", force: :cascade do |t|
-    t.integer "note_id"
-    t.integer "notebook_id"
-  end
-
-  add_index "note_notebooks", ["note_id"], name: "index_note_notebooks_on_note_id"
-  add_index "note_notebooks", ["notebook_id"], name: "index_note_notebooks_on_notebook_id"
+ActiveRecord::Schema.define(version: 20160722055049) do
 
   create_table "notebooks", force: :cascade do |t|
     t.string  "title"
-    t.text    "content"
-    t.integer "note_id"
+    t.integer "user_id"
   end
-
-  add_index "notebooks", ["note_id"], name: "index_notebooks_on_note_id"
 
   create_table "notes", force: :cascade do |t|
     t.string   "title"

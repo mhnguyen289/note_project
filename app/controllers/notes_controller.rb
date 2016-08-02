@@ -9,6 +9,7 @@ class NotesController < ApplicationController
 
 	def show
 		@notebooks = Notebook.all
+		@notebook = Note.find(params[:id])
 		
 		
 	end
@@ -20,8 +21,9 @@ class NotesController < ApplicationController
 	end
 
 	def create
-		# raise params
-		@note = current_user.notes.build(note_params)
+		  
+		@notebook = Notebook.find(params[:note][:notebook_id])
+		@note = @notebook.notes.create(note_params)
 
 		if @note.valid?
 			@note.save

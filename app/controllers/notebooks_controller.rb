@@ -7,10 +7,8 @@ class NotebooksController < ApplicationController
 		
 		 @notes = Note.all
 		 @notebook = Notebook.find_by(params[:id])
-		@notebooks = Notebook.all
-		@notes 
-		#@notes = @notebooks.notes.all
-		#@notebook = Notebook.first
+		@notebooks = @notebook.notes.all
+		
 	end
 
 	def show

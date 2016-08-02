@@ -1,7 +1,7 @@
 <h4>Here are your current Notebooks today:  </h4>
     <div class="wrapper_with_padding">
         <div class="clearfix" id="notes">
-         <% @notebooks.each do |notebook| %>
+         <% @notebooks.collect do |notebook| %>
             <div class="note">
                 <p class="title">    
     	           <%= link_to notebook.title, notebook_path(@notebook) %>

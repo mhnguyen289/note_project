@@ -28,7 +28,7 @@ class NotesController < ApplicationController
 	end
 
 	def create
-		 raise params.inspect  
+		  
 		@notebook = Notebook.find(params[:note][:notebook_id])
 		@note = @notebook.notes.create(note_params)
 

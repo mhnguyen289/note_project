@@ -10,4 +10,11 @@ def notebook_attributes=(notebook_attributes)
   end
 
 	
+	def self.all_notebook_titles
+  @titles = Notebook.all.collect do |notebook|
+    notebook.title
+  end
+  @titles
+end    
+
 end

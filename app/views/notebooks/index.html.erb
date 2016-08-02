@@ -1,19 +1,12 @@
-
-  <h1> Welcome to DOT.NOTE</h1>
-    <h4>Here are your current Notebooks today:  </h4>
-
-<div class="wrapper_with_padding">
-  <div class="clearfix" id="notes">
-
-	
-     <% @notebooks.each do |notebook| %>
-    			<div class="note">
-            <p class="title">
-    	 <%= link_to notebook.title, notebook_path(@notebook) %>
-    	    	</p>
-    	    	
+<h4>Here are your current Notebooks today:  </h4>
+    <div class="wrapper_with_padding">
+        <div class="clearfix" id="notes">
+         <% @notebooks.each do |notebook| %>
+            <div class="note">
+                <p class="title">    
+    	           <%= link_to notebook.title, notebook_path(@notebook) %>
+    	    	</p>	
             </div>
-
-    	   <%end%>
- 			</div>
- 			</div>
+    	<%end%>
+ 	</div>
+</div>

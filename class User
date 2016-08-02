@@ -1,0 +1,20 @@
+class User
+	has_many :notebooks
+
+	
+	 class Notebook
+		has_many :note_notebooks
+		has_many :notes, through: :note_notebooks (note_id)
+		belongs_to :user
+
+
+				class NoteNotebook
+					belongs_to :note 
+					belongs_to :notebook 
+	
+
+	
+		class Note 
+			
+			has_many :note_notebooks
+			has_one :notebook, through: :note_notebook (notebook_id)

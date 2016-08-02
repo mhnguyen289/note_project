@@ -13,4 +13,14 @@ class Notebook < ActiveRecord::Base
 #   @titles
 # end    
 
+def self.find_all_titles
+
+	@notebook = Notebook.find_by(params[:id])
+	@notes = Note.all
+	n = @notebook.notes.all
+	n.collect do |n|
+		n.title
+	end
+end
+
  end

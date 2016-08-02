@@ -19,19 +19,22 @@ class NotesController < ApplicationController
 	end
 
 	def new
+		
+		@notes = Note.all
+		@notebook = Notebook.find_by(params[:id])
 		@notebooks = Notebook.all
-		@note = current_user.notes.build
-		@notebook = Notebook.new
+		@note = @notebook.notes.build
+		
 	end
 
 	def create
-		  
+		 raise params.inspect  
 		@notebook = Notebook.find(params[:note][:notebook_id])
 		@note = @notebook.notes.create(note_params)
 
 		if @note.valid?
 			@note.save
-			redirect_to @note
+			render 'show'
 		else
 			render 'new'
 		end
@@ -40,7 +43,7 @@ class NotesController < ApplicationController
 	
 
 	def edit
-		@notebooks = Notebook.all
+		@note = Note.find_by(params[:id])
 	end
 
 	def update

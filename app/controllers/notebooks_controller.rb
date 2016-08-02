@@ -5,23 +5,24 @@ class NotebooksController < ApplicationController
 
 	def index
 		
-		# @notes = Note.all
-		# @notebook = Notebook.find_by(params[:id])
+		 @notes = Note.all
+		 @notebook = Notebook.find_by(params[:id])
 		@notebooks = Notebook.all
+		@notes 
 		#@notes = @notebooks.notes.all
-		@notebook = Notebook.first
+		#@notebook = Notebook.first
 	end
 
 	def show
-		
-		@notebooks = Notebook.all
-		@note = Note.find_by(params[:id])
-		@notes = Note.all
-		@notebook = Notebook.find_by(params[:id])
-		
 
-		
+		@notebook = Notebook.find_by(params[:id])
+		@notes = Note.all
+		notebooks = @notebook.notes.all
+		notebooks.collect do |notebooks|
+			@notebooks = notebooks.title
 		end
+	end
+
 
 	def new
 

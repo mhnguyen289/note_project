@@ -1,3 +1,4 @@
+
 class NotebooksController < ApplicationController
 
 
@@ -14,9 +15,9 @@ class NotebooksController < ApplicationController
 	end
 
 	def show
+		
+	  @notebook = Notebook.find(params[:id])
 
-		  @notebook = Notebook.find_by(params[:id])
-		  raise params.inspect
 		  #@notes = Note.all
 		#@note = Note.find(params[:id])
 

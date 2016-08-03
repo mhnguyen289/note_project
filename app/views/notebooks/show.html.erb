@@ -1,2 +1,15 @@
-            <%   @notebook.notes.all%>
-         
+
+
+<h4>Note Titles </h4>
+    <div class="wrapper_with_padding">
+        <div class="clearfix" id="notes">
+         <% @notebook.notes.each do |note|  %>
+
+            <div class="note">
+                <p class="title">    
+    <%= link_to note.title, note_path(note) %>
+            </p>  
+            </div>
+      <%end%>
+  </div>
+</div>

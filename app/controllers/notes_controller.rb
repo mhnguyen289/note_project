@@ -3,23 +3,23 @@ class NotesController < ApplicationController
 
 
 	def index
-		@note = Note.all
+		@notes = Note.all
 		@notebook = Notebook.find_by(params[:id])
 		#@note = Note.where(user_id: current_user)
-		@notes = @notebook.notes.all
+		#@notes = @notebook.notes.all
 		
 	end
 
 	def show
 
 		@notebooks = Notebook.all
-		@notebook = Note.find(params[:id])
+		@note = Note.find(params[:id])
 		
 		
 	end
 
 	def new
-		
+
 		@notes = Note.all
 		@notebook = Notebook.find_by(params[:id])
 		@notebooks = Notebook.all

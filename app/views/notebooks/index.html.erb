@@ -1,6 +1,6 @@
 
          <% @notebooks.each do |notebook| %>
 					
-    	           <%=  link_to notebook.title, notes_path(@notes)%>
+    	           <%=  link_to notebook.title, notebook_path(notebook)%>
     	<%end%>
 

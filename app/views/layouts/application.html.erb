@@ -33,8 +33,8 @@
           <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="width:200px;background-color: #2B2E2E">
           <a href="#" class="" data-value=2><h4> <%= link_to "Create Notebook", new_notebook_path(@notebook) %></a></h4>
             <li class="divider"></li>
-           <% Notebook.all.collect do |notebook| %>
-            <li><%=link_to notebook.title, notebooks_path(@notebook)%></li>
+           <% @notebooks.each do |notebook| %>
+            <li><%=link_to notebook.title, notebook_path(notebook)%></li>
             <%end%> 
           </ul>
 <script>

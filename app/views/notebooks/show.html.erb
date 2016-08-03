@@ -1,25 +1,10 @@
 
-<div class="wrapper_with_padding">
-  <div class="clearfix" id="notes">
-    <%unless @notes.blank? %>
-       <% @notes.each do |notes| %>
+         
+            <%=   @notebook.title%>
+
       
-          <div class="note">
-            <p class="title">
-               <%=link_to notes.title, notes_path(@notes) %>
-            </p>
-            <p class="date">
-              <%= time_ago_in_words(notes.created_at) %>
-            </p>
-          </div>
-        </a>
-      <%end%> 
-     <%else %>
-      <h2>Add a Note</h2>
-      <p>It appears you haven't created any notes yet... Lets fix that. Why don't you go ahead and create a new note.</p>
-      <button>
-        <%=link_to "New Note", new_note_path(@note) %>
-      </button>
-    <% end %>
-  </div>
-</div>
+
+
+         
+          
+        

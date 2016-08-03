@@ -5,20 +5,25 @@ class NotebooksController < ApplicationController
 
 	def index
 		
-		 @notes = Note.all
-		 @notebook = Notebook.find_by(params[:id])
-		@notebooks = @notebook.notes.all
+		 #@notes = Note.all
+		 #@notebook = Notebook.find_by(params[:id])
+		@notebooks = Notebook.all
+		
+		#@notes = @notebooks.notes.all
 		
 	end
 
 	def show
+raise params.inspect
+		 # @notebook = Notebook.find(params[:id])
+		 # @notes = Note.all
+		@note = Note.find_by(params[:id])
 
-		@notebook = Notebook.find_by(params[:id])
-		@notes = Note.all
-		notebooks = @notebook.notes.all
-		notebooks.collect do |notebooks|
-			@notebooks = notebooks.title
-		end
+		 # @notebooks = @notebook.notes
+		# notebooks = @notebook.notes.all
+		# notebooks.collect do |notebooks|
+		# 	@notebooks = notebooks.title
+		# end
 	end
 
 
@@ -31,11 +36,11 @@ class NotebooksController < ApplicationController
 
 	def create
 		
-		@notebook = Notebook.find_by(params[:id])
+		#@notebook = Notebook.find_by(params[:id])
 		@notebook = Notebook.create(notebook_params)
 		if @notebook.valid?
 			@notebook.save
-			redirect_to notebooks_path
+			redirect_to notebooks_path(@notebooks)
 		else
 			render :new
 		end

@@ -5,40 +5,21 @@ class NotebooksController < ApplicationController
 	before_action :find_notebook, only: [:show, :edit, :update, :destroy]
 
 	def index
-		
-		 #@notes = Note.all
-		 #@notebook = Notebook.find_by(params[:id])
 		@notebooks = Notebook.all
-		
-		#@notes = @notebooks.notes.all
-		
+		@notebook = Notebook.find_by(params[:id])
 	end
 
 	def show
-		
 	  @notebook = Notebook.find(params[:id])
-
-		  #@notes = Note.all
-		#@note = Note.find(params[:id])
-
-		 # @notebooks = @notebook.notes
-		# notebooks = @notebook.notes.all
-		# notebooks.collect do |notebooks|
-		# 	@notebooks = notebooks.title
-		# end
 	end
 
 
 	def new
-
-		
 		@notebook = Notebook.new
 		@notebooks = Notebook.all
 	end
 
 	def create
-		
-		#@notebook = Notebook.find_by(params[:id])
 		@notebook = Notebook.create(notebook_params)
 		if @notebook.valid?
 			@notebook.save
@@ -49,12 +30,15 @@ class NotebooksController < ApplicationController
 	end	
 
 	def edit
+		@notebook = Notebook.find_by(params[:id])
 	end
 
 	def update
 	end
 
 	def destroy
+		@notebook.destroy
+		redirect_to notebooks_path
 	end
 
 	private

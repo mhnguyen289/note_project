@@ -5,46 +5,33 @@ class NotesController < ApplicationController
 	def index
 		@notes = Note.all
 		@notebook = Notebook.find_by(params[:id])
-		
-		#@note = Note.where(user_id: current_user)
-		#@notes = @notebook.notes.all
-		
 	end
 
 	def show
-
 		@notebooks = Notebook.all
 		@note = Note.find(params[:id])
-		
-		
 	end
 
 	def new
-
 		@notes = Note.all
 		@notebook = Notebook.find_by(params[:id])
 		@notebooks = Notebook.all
 		@note = @notebook.notes.build
-		
 	end
 
-	def create
-		  
+	def create	  
 		@notebook = Notebook.find(params[:note][:notebook_id])
 		@note = @notebook.notes.create(note_params)
-
 		if @note.valid?
 			@note.save
 			render 'show'
 		else
 			render 'new'
 		end
-	end
-
-	
+	end	
 
 	def edit
-		@note = Note.find_by(params[:id])
+		@note = Note.find(params[:id])
 	end
 
 	def update

@@ -21,14 +21,11 @@
          
 
   <% if user_signed_in? %>
-        <!-- what I wanted the jquery be used on-->
-
-
 
           <div class="dropdown">
           <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"style="width:200px;color: #f5f5f5;background-color: #2B2E2E ;">
             
-            <span class="caret"></span>Notebooks
+            <span class="caret"></span> Notebooks
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="width:200px;background-color: #2B2E2E">
           <a href="#" class="" data-value=2><h4> <%= link_to "Create Notebook", new_notebook_path(@notebook) %></a></h4>
@@ -38,12 +35,6 @@
             <li><%=link_to notebook.title, notebook_path(notebook)%></li>
             <%end%> 
           </ul>
-<script>
-$(".dropdown-menu li ").click(function(){
-  $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
-  $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
-});
-</script>
      
         <%= link_to "Profile", user_path(current_user) %>
         <%= link_to('Log Out', destroy_user_session_path, :method => :delete) %>

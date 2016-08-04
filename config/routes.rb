@@ -5,9 +5,7 @@ Rails.application.routes.draw do
 end
   get 'welcome/index'
   
-  # resources :notebooks do
-  #   resources :notes
-  # end
+
   resources :users 
   resources :notes
   resources :notebooks
@@ -16,10 +14,6 @@ end
   authenticated :user do
   	root 'notes#new', as: "authenticated_root"
   end
-
-resources :notebooks do 
-  resources :notes, only: [:show]
-end
 
   root 'welcome#index'
 end

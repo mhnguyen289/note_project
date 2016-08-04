@@ -5,8 +5,11 @@
             <div class="note">
                 <p class="title">    
     	           <%=link_to notebook.title, notebook_path(notebook)%>
-    	    	</p>	
-            </div>
-    	<%end%>
- 	</div>
-</div>
+    	    		 </p>	
+				</div>
+					
+      				<!--  link_to "Edit", edit_notebook_path(@notebook) class: "button" 
+      				 link_to "Delete", notebook_path(@notebook), method: :delete, data: { confirm: "Are you sure?" }, class: "button" 
+      			 -->
+      	<%end%>
+    </div>

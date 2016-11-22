@@ -19,7 +19,8 @@ class NotesController < ApplicationController
 		@note = @notebook.notes.build
 	end
 
-	def create	  
+	def create
+		@notebooks = Notebook.all	  
 		@notebook = Notebook.find(params[:note][:notebook_id])
 		@note = @notebook.notes.create(note_params)
 		if @note.valid?

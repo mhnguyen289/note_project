@@ -6,7 +6,8 @@
       <p><%= simple_format(@note.content)%></p>
 
       <div class= "buttons">
+      <%= link_to "Done", new_note_path, class: "button" %>
       <%= link_to "Edit", edit_note_path(@note), class: "button" %>
-      <%= link_to "Delete", note_path(@note), method: :delete, data: { confirm: "Are you sure?" }, class: "button" %>
+      <%= link_to "Delete", @note, method: :delete, data: { confirm: "Are you sure?" }, class: "button" %>
 
 </div>

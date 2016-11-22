@@ -6,7 +6,9 @@ class NotebooksController < ApplicationController
 
 	def index
 		@notebooks = Notebook.all
+		binding.pry
 		@notebook = Notebook.find_by(params[:id])
+
 	end
 
 	def show
@@ -41,11 +43,7 @@ class NotebooksController < ApplicationController
 		redirect_to notebooks_path
 	end
 
-	private
-
-	def notebook_params
-		params.require(:notebook).permit(:title, :note, :note_id)
-	end
+	
 
 	def find_notebook
 		@notebook = Notebook.find_by(params[:id])

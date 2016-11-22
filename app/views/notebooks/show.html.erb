@@ -1,23 +1,30 @@
-<h4>Note Titles for <%=@notebook.title%></h4>
-    <div class="wrapper_with_padding">
-        <div class="clearfix" id="notes">
-            <%unless @notebook.notes.blank? %>
-         <% @notebook.notes.each do |note|  %>
-            <div class="note">
-                <p class="title">    
-    <%= link_to note.title, note_path(note) %>
-            </p>  
-            <p class="date">
-              <%= time_ago_in_words(note.created_at) %>
-            </p>
-            </div>
-      <%end%>
+
+<div class="wrapper_with_padding">
+  <h2><b><%=@notebook.title%></b></h2>
+  <div class="clearfix" id="notes">
+    <%unless @notebook.notes.blank? %>
+    <% @notebook.notes.each do |note|  %>
+    <div class="note">
+      <p class="title">    
+        <%= link_to note.title, note_path(note) %>
+      </p>  
+      <p class="date">
+        <%= time_ago_in_words(note.created_at) %>
+      </p>
+      <p class= "delete">
+        <%= link_to "Delete", note.title, method: :delete, data: { confirm: "Are you sure?" } %>
+        </div>
+        <%end%>
+
+    </div>
     <%else%>
-  <h2>Add a Notebook</h2>
-      <p>It appears you haven't created any notes yet... Lets fix that. Why don't you go ahead and create a new note.</p>
-      <button>
-        <%= link_to "New Notebook", new_notebook_path %>
-      </button>
+    <h2>Add a Note!</h2>
+    <p>It appears you haven't created any notes yet... Lets fix that. Why don't you go ahead and create a new note.</p>
+    <button>
+      <%= link_to "New Note", new_note_path %>
+    </button>
     <% end %>
   </div>
+
 </div>
+

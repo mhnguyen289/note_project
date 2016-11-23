@@ -2,11 +2,11 @@
 class NotebooksController < ApplicationController
 
 
-	before_action :find_notebook, only: [:show, :edit, :update, :destroy]
+	before_action :find_notebook, only: [:index, :show, :edit, :update, :destroy]
 
 	def index
 		@notebooks = Notebook.all
-		binding.pry
+		# binding.pry
 		@notebook = Notebook.find_by(params[:id])
 
 	end
@@ -44,9 +44,14 @@ class NotebooksController < ApplicationController
 	end
 
 	
+private
+
+	def notebook_params
+		params.require(:notebook).permit(:title, :user_id, notebook_attributes: [:title])
+	end
 
 	def find_notebook
-		@notebook = Notebook.find_by(params[:id])
+		@notebook = Notebook.where(params[:id])
 	end	
 end
 

@@ -2,7 +2,7 @@
   <%= f.input :title, placeholder: 'Ex: Weekly team update' %> 
   <div class="field">
   <%=f.label "Choose a notebook"%>
-  <%= f.collection_select(:notebook_id, @notebooks.order('title ASC'), :id, :title, {include_blank: false})%>
+  <%= f.collection_select(:notebook_id, Notebook.all.order('title ASC'), :id, :title, {include_blank: false})%>
   <!-- f.fields_for :notebook, @notebook do |notebook_field|
      notebook_field.text_field :title, placeholder: 'New Notebook'
   end -->

@@ -16,7 +16,7 @@ class NotesController < ApplicationController
 		@notes = Note.all
 		@notebook = Notebook.find_by(params[:id])
 		@notebooks = Notebook.all
-		@note = @notebook.notes.build
+		@note = current_user.notes.build # @notebboks
 	end
 
 	def create
@@ -37,18 +37,15 @@ class NotesController < ApplicationController
 
 	def update
 		if @note.update(note_params)
-			redirect_to note_path
+			redirect_to @note
 		else
 			render 'edit'
 		end
 	end
 
 	def destroy
-		if @note.destroy
-			redirect_to notebook_path
-		else
-			render :show
-		end
+		@note.destroy
+		redirect_to notes_path
 	end
 
 	private

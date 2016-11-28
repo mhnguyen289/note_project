@@ -6,26 +6,27 @@ class NotebooksController < ApplicationController
 
 	def index
 		@notebooks = Notebook.all
-		# binding.pry
+		
 		@notebook = Notebook.find_by(params[:id])
 
 	end
 
 	def show
-	  @notebook = Notebook.find(params[:id])
+		@notebooks = Notebook.all
+	   @notebook = Notebook.find(params[:id])
 	end
 
 
 	def new
 		@notebook = Notebook.new
-		@notebooks = Notebook.all
+		# @notebooks = Notebook.all
 	end
 
 	def create
 		@notebook = Notebook.create(notebook_params)
 		if @notebook.valid?
 			@notebook.save
-			redirect_to notebooks_path(@notebooks)
+			redirect_to notebooks_path
 		else
 			render :new
 		end
@@ -36,11 +37,18 @@ class NotebooksController < ApplicationController
 	end
 
 	def update
+		notebook = Notebook.find(params[:id])
+		if notebook.update(notebook_params)
+			render 'index'
+		else
+			render 'edit'
+		end
 	end
 
 	def destroy
-		@notebook.destroy
-		redirect_to notebooks_path
+		notebook = Notebook.find(params[:id])
+		notebook.destroy
+		render :index
 	end
 
 	

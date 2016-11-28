@@ -3,6 +3,7 @@
   <h2><b><%=@notebook.title%></b></h2>
   <div class="clearfix" id="notes">
     <%unless @notebook.notes.blank? %>
+
     <% @notebook.notes.each do |note|  %>
     <div class="note">
       <p class="title">    
@@ -12,7 +13,7 @@
         <%= time_ago_in_words(note.created_at) %>
       </p>
       <p class= "delete">
-        <%= link_to "Delete", note.title, method: :delete, data: { confirm: "Are you sure?" } %>
+        <!--  link_to "Delete", notebook_path(@notebook), method: :delete, data: { confirm: "Are you sure?" } -->
         </div>
         <%end%>
 

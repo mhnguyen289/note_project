@@ -3,20 +3,22 @@ class NotesController < ApplicationController
 
 
 	def index
-		@notes = Note.all
-		@notebook = Notebook.find_by(params[:id])
+		@notes = Note.all 
+		# @notebook = Notebook.find_by(params[:id])
+		# @note = Note.find_by(params[:id])
 	end
 
 	def show
+
 		@notebooks = Notebook.all
-		@note = Note.find(params[:id])
+		@note = Note.find_by(params[:id])
 	end
 
 	def new
 		@notes = Note.all
 		@notebook = Notebook.find_by(params[:id])
 		@notebooks = Notebook.all
-		@note = current_user.notes.build # @notebboks
+		@note = @notebook.notes.build 
 	end
 
 	def create
@@ -44,8 +46,10 @@ class NotesController < ApplicationController
 	end
 
 	def destroy
-		@note.destroy
-		redirect_to notes_path
+		note = Note.find(params[:id])
+		notebook = note.notebook
+		note.destroy
+		redirect_to notebook_path(notebook)
 	end
 
 	private

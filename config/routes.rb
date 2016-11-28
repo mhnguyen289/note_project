@@ -12,7 +12,7 @@ end
   
   
   authenticated :user do
-  	root 'notes#new', as: "authenticated_root"
+  	root 'notebooks#index', as: "authenticated_root"
   end
 
   root 'welcome#index'

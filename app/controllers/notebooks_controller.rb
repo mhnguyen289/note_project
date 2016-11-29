@@ -5,7 +5,13 @@ class NotebooksController < ApplicationController
 	before_action :find_notebook, only: [:index, :show, :edit, :update, :destroy]
 
 	def index
-		@notebooks = Notebook.all
+
+		
+			@notebooks = current_user.notebooks
+		
+		
+		
+		
 		
 		@notebook = Notebook.find_by(params[:id])
 
@@ -23,7 +29,7 @@ class NotebooksController < ApplicationController
 	end
 
 	def create
-		@notebook = Notebook.create(notebook_params)
+		@notebook = current_user.notebooks.create(notebook_params)
 		if @notebook.valid?
 			@notebook.save
 			redirect_to notebooks_path

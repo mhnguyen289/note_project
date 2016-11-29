@@ -2,7 +2,7 @@
     <div class="wrapper_with_padding">
         <div class="clearfix" id="notes">
         <%unless @notebooks.blank? %>
-        <h4>Here are your current Notebooks today:  </h4>
+        <h4>Here are <%= @possessive %> current Notebooks today:  </h4>
          <% @notebooks.each do |notebook| %>
             <div class="note">
                 <p class="title">   

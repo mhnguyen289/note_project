@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
          :omniauthable, :omniauth_providers => [:facebook]
 
          has_many :notes
+         has_many :notebooks
          
          
 end

@@ -34,7 +34,7 @@
           <a href="#" class="" data-value=2><h4> <%= link_to "All Notebooks", notebooks_path %></a></h4>
             <li class="divider"></li>
             
-           <% Notebook.all.each do |notebook| %>
+           <% @notebooks.each do |notebook| %>
             <li><%=link_to notebook.title, notebook_path(notebook)%></li>
             <%end%> 
           </ul>

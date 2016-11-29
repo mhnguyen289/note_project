@@ -3,7 +3,7 @@ class NotesController < ApplicationController
 
 
 	def index
-		@notes = Note.all 
+		@notes = current_user.notes
 		# @notebook = Notebook.find_by(params[:id])
 		# @note = Note.find_by(params[:id])
 	end

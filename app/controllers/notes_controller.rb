@@ -10,19 +10,19 @@ class NotesController < ApplicationController
 
 	def show
 
-		@notebooks = Notebook.all
+		@notebooks = current_user.notebooks.all
 		@note = Note.find_by(params[:id])
 	end
 
 	def new
-		@notes = Note.all
+		# @notes = Note.all
 		@notebook = Notebook.find_by(params[:id])
-		@notebooks = Notebook.all
+		@notebooks = current_user.notebooks.all
 		@note = @notebook.notes.build 
 	end
 
 	def create
-		@notebooks = Notebook.all	  
+		@notebooks = current_user.notebooks.all	  
 		@notebook = Notebook.find(params[:note][:notebook_id])
 		@note = @notebook.notes.create(note_params)
 		if @note.valid?
@@ -34,6 +34,7 @@ class NotesController < ApplicationController
 	end	
 
 	def edit
+		@notebooks = current_user.notebooks.all
 		@note = Note.find(params[:id])
 	end
 

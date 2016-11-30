@@ -1,61 +1,56 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-  <head>
-    <title>DOT.NOTE| Online Notebook Application</title>
+<head>
+  <title>DOT.NOTE| Online Notebook Application</title>
 
-      <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-        <%= javascript_include_tag :application %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag :application %>
+  <%= csrf_meta_tags %>
 
-      
-      <%= csrf_meta_tags %>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
 
-<meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  </head>
+<body>
+  <header>
+    <div class="header_inner">
+      <%= link_to image_tag( 'logo.jpg'), root_path, id: "logo" %>
+      <nav>    
 
-  <body>
-    <header>
-      <div class="header_inner">
-        <%= link_to image_tag( 'logo.jpg'), root_path, id: "logo" %>
-        <nav>    
-         
+        <% if user_signed_in? %>
 
-  <% if user_signed_in? %>
-
-          <div class="dropdown">
+        <div class="dropdown">
           <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"style="width:200px;color: #f5f5f5;background-color: #2B2E2E ;">
-            
+
             <span class="caret"></span> Notebooks
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="width:200px;background-color: #2B2E2E">
-          <a href="#" class="" data-value=2><h4> <%= link_to "Create Notebook", new_notebook_path(@notebook) %></a></h4>
-          <a href="#" class="" data-value=2><h4> <%= link_to "All Notebooks", notebooks_path %></a></h4>
+            <a href="#" class="" data-value=2><h4> <%= link_to "Create Notebook", new_notebook_path(@notebook) %></a></h4>
+            <a href="#" class="" data-value=2><h4> <%= link_to "All Notebooks", notebooks_path %></a></h4>
             <li class="divider"></li>
-            
-           <% @notebooks.each do |notebook| %>
+            <% @notebooks.each do |notebook| %>
             <li><%=link_to notebook.title, notebook_path(notebook)%></li>
             <%end%> 
           </ul>
-     
-        <%= link_to "Profile", user_path(current_user) %>
-        <%= link_to('Log Out', destroy_user_session_path, :method => :delete) %>
-         <% else %>
+          <%= link_to "Profile", user_path(current_user) %>
+          <%= link_to('Log Out', destroy_user_session_path, :method => :delete) %>
+          <% else %>
           <%= link_to "Log In", new_user_session_path %>
-        <% end %>
-      </nav>
+          <% end %>
+        </nav>
       </div>
-  </header>
-  <p class="notice">
-    <%= notice %>
-  </p>
-  <p class="alert">
-    <%= alert %>
-  </p>
-  <%= yield %>
-</body>
-</html>
+    </header>
+    <p class="notice">
+      <%= notice %>
+    </p>
+    <p class="alert">
+      <%= alert %>
+    </p>
+    <%= yield %>
+  </body>
+  </html>
 
 
 

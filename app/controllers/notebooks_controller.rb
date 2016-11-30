@@ -5,14 +5,7 @@ class NotebooksController < ApplicationController
 	before_action :find_notebook, only: [:index, :show, :edit, :update, :destroy]
 
 	def index
-
-		
-			@notebooks = current_user.notebooks
-		
-		
-		
-		
-		
+		@notebooks = current_user.notebooks
 		@notebook = Notebook.find_by(params[:id])
 
 	end

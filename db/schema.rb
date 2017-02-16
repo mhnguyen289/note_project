@@ -22,17 +22,18 @@ ActiveRecord::Schema.define(version: 20161129233530) do
   add_index "note_notebooks", ["notebook_id"], name: "index_note_notebooks_on_notebook_id"
 
   create_table "notebooks", force: :cascade do |t|
-    t.string  "title"
+    t.string  "notebook_title"
+    t.string  "notebook_content"
     t.integer "user_id"
   end
 
   create_table "notes", force: :cascade do |t|
-    t.string   "title"
-    t.text     "content"
+    t.string   "note_title"
+    t.text     "note_content"
     t.integer  "user_id"
     t.integer  "notebook_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   add_index "notes", ["notebook_id"], name: "index_notes_on_notebook_id"

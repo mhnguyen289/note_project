@@ -1,6 +1,4 @@
-
 class NotebooksController < ApplicationController
-
 
 	before_action :find_notebook, only: [:index, :show, :edit, :update, :destroy]
 
@@ -22,6 +20,7 @@ class NotebooksController < ApplicationController
 	end
 
 	def create
+		
 		@notebook = current_user.notebooks.create(notebook_params)
 		if @notebook.valid?
 			@notebook.save
@@ -54,7 +53,7 @@ class NotebooksController < ApplicationController
 private
 
 	def notebook_params
-		params.require(:notebook).permit(:title, :user_id, notebook_attributes: [:title])
+		params.require(:notebook).permit(:notebook_title, :notebook_content, :user_id, notebook_attributes: [:title])
 	end
 
 	def find_notebook

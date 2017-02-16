@@ -1,33 +1,62 @@
 class NotesController < ApplicationController
-	before_action :find_note, only: [:show, :edit, :destroy, :update]
+	before_action :find_note, only: [:show, :edit, :destroy, :update, :api_show]
 
 
 	def index
-		@notes = current_user.notes
-		# @notebook = Notebook.find_by(params[:id])
-		# @note = Note.find_by(params[:id])
+		
+
+		# @notes = current_user.notes
+		# render json: @notes
+	end
+
+	def api_index
+		@notes = Note.all
+		render json: @notes
+	end
+
+	def api_show
+		
+		@note = Note.find_by_id(params[:id])
+		render json: @note
 	end
 
 	def show
 
 		@notebooks = current_user.notebooks.all
-		@note = Note.find_by(params[:id])
+		@note = Note.find(params[:id])
 	end
 
 	def new
+
 		# @notes = Note.all
-		@notebook = Notebook.find_by(params[:id])
-		@notebooks = current_user.notebooks.all
-		@note = @notebook.notes.build 
+		
+		# if params["notebook_id"]
+		#  @notebook = current_user.notebooks.find(params[:notebook_id])
+		# else
+		#  @notebook = Notebook.find_by(params[:id])
+		# end
+		#@notebooks = current_user.notebooks.all
+		 # @note = @notebook.notes.build 
+
+		# @notebook = current_user.notebooks.build() 
+		# @note = current_user.notes.build()
+		@note = current_user.notes.build()
 	end
 
 	def create
-		@notebooks = current_user.notebooks.all	  
-		@notebook = Notebook.find(params[:note][:notebook_id])
-		@note = @notebook.notes.create(note_params)
+		
+		binding.pry
+		@note = current_user.notes.build(note_params)
+		
+		# @notebook = Notebook.find_or_create_by(:content=>params[:note][:content])
+		# @notebook = Notebook.find_or_create_by(note_params)
+		# @note = @notebook.notes.new(note_params)
+		 @notebook = Notebook.find_or_create_by(:notebook_title=>params[:note][:notebook_attributes])
+		  @note.notebook = @notebook
 		if @note.valid?
 			@note.save
-			render 'show'
+			
+			redirect_to notebook_note_path(@notebook, @note)
 		else
 			render 'new'
 		end
@@ -47,6 +76,7 @@ class NotesController < ApplicationController
 	end
 
 	def destroy
+		
 		note = Note.find(params[:id])
 		notebook = note.notebook
 		note.destroy
@@ -61,7 +91,8 @@ class NotesController < ApplicationController
 	end
 
 	def note_params
-		params.require(:note).permit(:title, :content, :notebook_id, notebook_attributes: [:title])
+		params.require(:note).permit(:note_title, :note_content, :notebook_attributes)
+		
 	end
 
 

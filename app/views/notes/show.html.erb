@@ -2,8 +2,8 @@
   <div id="note_show">
 
 
-    <h1><%=@note.title%></h1>
-      <p><%= @note.content%></p>
+    <h1><%=@note.note_title%></h1>
+      <p><%= @note.note_content%></p>
 
       <div class= "buttons">
       <%= link_to "Done", new_note_path, class: "button" %>
@@ -11,5 +11,10 @@
 
       <%= link_to "Delete", note_path(@note), method: :delete, data: { confirm: "Are you sure?" }, class: "button" %>
 
-</div>
 
+
+<a class="pull-left js-prev" data-id="<%= @note.id %>" href="#">Previous note...</a>
+
+
+<a class="pull-right js-next" data-id="<%= @note.id %>" href="#">Next note...</a>
+</div>

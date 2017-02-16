@@ -1,14 +1,20 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }
    devise_scope :user do
   	 get '/users/sign_out' => 'devise/sessions#destroy' 
 end
   get 'welcome/index'
+
+  get '/api/notes', to: 'notes#api_index' 
+  get '/api/notes/:id', to: 'notes#api_show'
+
   
 
   resources :users 
   resources :notes
-  resources :notebooks
+  resources :notebooks do
+    resources :notes
+  end
   
   
   authenticated :user do
@@ -17,10 +23,3 @@ end
 
   root 'welcome#index'
 end
-
-
-# get '/admin/stats', to: 'stats#index'
-# get '/admin/authors/new', to: 'authors#new'
-# get '/admin/authors/delete', to: 'authors#delete'
-# get '/admin/authors/create', to: 'authors#create'
-# get '/admin/comments/moderate', to: 'comments#moderate'

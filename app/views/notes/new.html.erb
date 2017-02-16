@@ -1,5 +1,22 @@
 <div class="wrapper_with_padding">
-	<h1> Create notes and to-do's</h1>
-		<%= render "form" %>
-</div>
+	
+
+	<% if @note.errors.any? %>
+	<ul>
+		<% @note.errors.full_messages.each do |message| %>
+		
+		<li> <%= message %></li>
+		<% end %>
+	</ul>
+	<%end %>
+
+
+ <!-- if params.has_key?(:notebook_id)  -->
+	<%= form_for @note do |f| %>
+	
+	<%= render partial: 'form', locals: {f: f} %>
+	</div>
+	<% end %>
+	
+
 

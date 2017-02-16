@@ -1,9 +1,18 @@
 
-	<%= simple_form_for @notebook do |f| %>
-  	<%= f.input :title, placeholder: 'Title your notebook' %> 
-	
-	<%= f.button :submit, class: "button" %>
+<%if @notebook.errors.any? %>
+<ul>
+	<% @notebook.errors.full_messages.each do |message| %>
+	<li><%= message %> </li>
 	<% end %>
+</ul>
+<% end %>
+
+<%= form_for @notebook do |f| %>
+<%= f.label :notebook_title %> 
+<%= f.text_field :notebook_title , placeholder: 'Title your notebook'%>
+
+<%= f.button :submit, class: "button" %>
+<% end %>
 
 
 

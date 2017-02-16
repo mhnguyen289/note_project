@@ -4,8 +4,8 @@
 
   		<%unless @notes.blank? %>
   		<% @notes.each do |note| %>
-    <h1><%=note.title%></h1>
-      <p><%= note.content%></p>
+    <h1><%=note.note_title%></h1>
+      <p><%= note.note_content%></p>
 
 
       <div class= "buttons">
@@ -26,3 +26,7 @@
 
 </div>
 
+<div id ='all-notes'>
+  <h3> Click the button to view all the notes</h3>
+  <%= button_tag "view all posts", class: 'view-notes' %>
+</div>

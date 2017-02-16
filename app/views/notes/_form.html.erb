@@ -1,20 +1,35 @@
-  <%= simple_form_for @note do |f| %>
-    <%= f.input :title, placeholder: 'Ex: Weekly team update' %> 
-    <div class="field">
-    <%=f.label "Choose a notebook"%>
-    <%= f.collection_select(:notebook_id, current_user.notebooks.order('title ASC'), :id, :title, {include_blank: false})%>
-    
-  </div>
-    <%= f.input :content, placeholder:
-           'AGENDA
-            - Introducing Monica, new marketing manager
-            - Strategy for next launch
+<!-- <h3>f.label "Note:" @notebook.notebook_title </h3>
+-->
 
-            SUMMARY
-            - Monica will be doing PR for desktop products
-            - Launch date 5/1/16
-            - Marketing press release goes out 4/30
-            '%>
-        
-          <%= f.button :submit, class: "button" %>
-      <% end %>
+
+
+
+<%= f.label 'Choose a Notebook or Create a New One' %>
+<%=f.collection_select(:notebook_id, current_user.notebooks.order('notebook_title ASC'), :id, :notebook_title, {include_blank: true})%><br>
+
+<%= f.fields_for :notebooks do |p| %>
+<%= p.label :notebook_title %>
+<%= p.text_field :notebook_attributes %>
+<% end %>
+
+<%= f.label :note_title %><br>
+<%= f.text_field :note_title, placeholder: 'Note Title Here' %><br>
+
+
+
+<%= f.label :note_content %>
+<%= f.text_area :note_content, placeholder:
+' SUMMARY
+- Monica will be doing PR for desktop products
+- Launch date 5/1/16
+- Marketing press release goes out 4/30
+'%>
+
+
+<%= f.button :submit, class: "button" %>
+
+
+
+
+
+

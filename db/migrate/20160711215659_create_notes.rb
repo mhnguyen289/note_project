@@ -1,8 +1,8 @@
 class CreateNotes < ActiveRecord::Migration
   def change
     create_table :notes do |t|
-      t.string :title
-      t.text :content
+      t.string :note_title
+      t.text :note_content
       t.integer :user_id
       t.references :notebook, index: true, foreign_key: true
 

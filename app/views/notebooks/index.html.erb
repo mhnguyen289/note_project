@@ -1,22 +1,29 @@
 
+    
     <div class="wrapper_with_padding">
+
+
+
         <div class="clearfix" id="notes">
+
+
         <%unless @notebooks.blank? %>
         <h4>Here are <%= @possessive %> current Notebooks today:  </h4>
+
          <% @notebooks.each do |notebook| %>
             <div class="note">
                 <p class="title">   
                 
-    	           <%=link_to notebook.title, notebook_path(notebook)%>
-    	    		 </p>	
-				
-					 
-      				 <%=link_to "Edit", edit_notebook_path(notebook)  %>
+                 <%=link_to notebook.notebook_title, notebook_path(notebook)%>
+               </p> 
+        
+           
+               <%=link_to "Edit", edit_notebook_path(notebook)  %>
                <p class= "delete">
-      				 <%= link_to "Delete", notebook_path(notebook), method: :delete, data: { confirm: "Are you sure?" } %>
+               <%= link_to "Delete", notebook_path(notebook), method: :delete, data: { confirm: "Are you sure?" } %>
                </p>
-      			</div>
-      	<%end%>
+            </div>
+        <%end%>
         <%else%>
     <h2>Add a Notebook!</h2>
     <p>It appears you haven't created any notes yet... Lets fix that. Why don't you go ahead and create a new note.</p>
@@ -24,5 +31,11 @@
       <%= link_to "New Notebook", new_notebook_path %>
     </button>
     <% end %>
-
     </div>
+
+
+<div id = 'all-notes'>
+  <h3> Click here to view all notes </h3>
+    <%= button_tag "All Notes", class: 'view-notes' %>
+</div>    
+         

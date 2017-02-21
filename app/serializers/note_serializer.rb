@@ -3,4 +3,5 @@ class NoteSerializer < ActiveModel::Serializer
   
   belongs_to :notebook
   belongs_to :user
+  has_many :comments
 end

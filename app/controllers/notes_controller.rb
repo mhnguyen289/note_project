@@ -24,6 +24,7 @@ class NotesController < ApplicationController
 
 		@notebooks = current_user.notebooks.all
 		@note = Note.find(params[:id])
+		@comment = @note.comments.build
 	end
 
 	def new
@@ -45,7 +46,7 @@ class NotesController < ApplicationController
 
 	def create
 		
-		binding.pry
+		
 		@note = current_user.notes.build(note_params)
 		
 		# @notebook = Notebook.find_or_create_by(:content=>params[:note][:content])

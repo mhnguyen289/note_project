@@ -9,7 +9,7 @@ end
   get '/api/notes/:id', to: 'notes#api_show'
 
   
-
+  resources :comments, only: [:create, :destroy]
   resources :users 
   resources :notes
   resources :notebooks do

@@ -3,7 +3,7 @@ class Note < ActiveRecord::Base
 	# has_one :notebook, through: :note_notebook
 	# has_one :note_notebook
 	 belongs_to :notebook
-	 # has_many :comments, dependent: :destroy
+	 has_many :comments, dependent: :destroy
 	# validates_presence_of :title, :notebook_id
 	# validates_uniqueness_of :title
 

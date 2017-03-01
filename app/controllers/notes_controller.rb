@@ -5,6 +5,7 @@ class NotesController < ApplicationController
 	def index
 		
 
+		@notes = Note.all
 		# @notes = current_user.notes
 		# render json: @notes
 	end
@@ -20,43 +21,42 @@ class NotesController < ApplicationController
 		render json: @note
 	end
 
+	def api_next 
+		
+		@note = Note.find_by_id(params[:id])
+		@next_note = @note.next
+		render json: @next_note
+	end
+
+	def api_prev 
+		@note = Note.find_by_id(params[:id])
+		@prev_note = @note.previous
+		render json: @prev_note
+	end
+
 	def show
 
 		@notebooks = current_user.notebooks.all
 		@note = Note.find(params[:id])
-		@comment = @note.comments.build
+		@comment = Comment.new
+		respond_to do |f|
+			f.html {render :show }
+			f.json {render json: @note }
+		end
+		 # raise @note.inspect
 	end
 
 	def new
-
-		# @notes = Note.all
-		
-		# if params["notebook_id"]
-		#  @notebook = current_user.notebooks.find(params[:notebook_id])
-		# else
-		#  @notebook = Notebook.find_by(params[:id])
-		# end
-		#@notebooks = current_user.notebooks.all
-		 # @note = @notebook.notes.build 
-
-		# @notebook = current_user.notebooks.build() 
-		# @note = current_user.notes.build()
 		@note = current_user.notes.build()
 	end
 
 	def create
 		
-		
-		@note = current_user.notes.build(note_params)
-		
-		# @notebook = Notebook.find_or_create_by(:content=>params[:note][:content])
-		# @notebook = Notebook.find_or_create_by(note_params)
-		# @note = @notebook.notes.new(note_params)
-		 @notebook = Notebook.find_or_create_by(:notebook_title=>params[:note][:notebook_attributes])
-		  @note.notebook = @notebook
+		@notebook = Notebook.find_by(params[:id])
+		@note = @notebook.notes.build(note_params)
+		@note.user = current_user
 		if @note.valid?
 			@note.save
-			
 			redirect_to notebook_note_path(@notebook, @note)
 		else
 			render 'new'
@@ -92,7 +92,7 @@ class NotesController < ApplicationController
 	end
 
 	def note_params
-		params.require(:note).permit(:note_title, :note_content, :notebook_attributes)
+		params.require(:note).permit(:notebook_id, :note_title, :note_content)
 		
 	end
 

@@ -7,11 +7,13 @@ end
 
   get '/api/notes', to: 'notes#api_index' 
   get '/api/notes/:id', to: 'notes#api_show'
+  get 'api/notes/:id/next', to: 'notes#api_next'
+  get 'api/notes/:id/prev', to: 'notes#api_prev'
 
   
-  resources :comments, only: [:create, :destroy]
   resources :users 
   resources :notes
+  resources :comments, only: [:show, :new, :create]
   resources :notebooks do
     resources :notes
   end
@@ -23,3 +25,4 @@ end
 
   root 'welcome#index'
 end
+

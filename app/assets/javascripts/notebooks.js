@@ -40,3 +40,14 @@
 
 // 	},
 // }
+// <button name="button" type="submit" class="js-prev" data-id="${this.id}">Previous Note</button>
+//               <a class="button" href="/notes/${this.id}/edit">Edit</a>
+//               <a class="button" href="/notes/new">Done</a>
+//               <a data-confirm="Are you sure?" class="button" rel="nofollow" data-method="delete" href="/notes/${this.id}">Delete</a>
+//               <button name="button" type="submit" class="js-next" data-id="${this.id}">Next Note</button>
+//               <h4 id="status-list">Comments</h4>
+//               <form class="new_comment" id="new_comment" action="/comments" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="xuLYlgLsNqyZDQIivpLQdZwA/EMeZT4ZLOSWkDCO7xLcK3WWml8i6ntK5HVP5e0/Gtl3seG6hYH6DdfOmPqPAQ==">
+//               <input type="text" name="comment[content]" id="comment_content">
+//               <input value="${this.id}" type="hidden" name="comment[note_id]" id="comment_note_id">
+//               <input type="submit" name="commit" value="Create Comment" data-disable-with="Create Comment">
+//               </form>

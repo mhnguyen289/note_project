@@ -1,31 +1,49 @@
 $(function() {
-  bindClick()
-})
+  bindClick();
+});
 
 //ajax allows the application to request more info from server without locking the browser
 function bindClick() {
 
+  // $(document).on("click", ".view-notes", function(e){
+  //   // e.preventDefault();
+  //   // hijack the click event of view-notes link to fire ajax request
+  //   $.get("/api/notes",function(data){ //getting the array of objects from api/notes. Anon func will not fire until arr of obj is received. Using function callbacks 
+  //     $("#all-notes").html("<h4>Here are current Notes today:</h4>");
+  //     data.forEach(function(note){ 
+  //       let newNote = new Note(note.id,note.note_title); //calling new on Note function 
+  //       let formattedNote = newNote.formatNotesIndex();
+  //       $("#all-notes").append(formattedNote);
+  //     });
+  //   });
+  // });
+
+
   $(document).on("click", ".view-notes", function(e){
-    // e.preventDefault();
-    // hijack the click event of view-notes link to fire ajax request
-    $.get("/api/notes", function(data){ //getting the array of objects from api/notes. Anon func will not fire until arr of obj is received
-      $("#all-notes").html("<h4>Here are current Notes today:</h4>")
-      data.forEach(function(note) { 
-        var newNote = new Note(note.id, note.note_title); //calling new on Note function 
-        var formattedNote = newNote.formatNotesIndex()
+    e.preventDefault();
+   fetch(`/api/notes`)
+    .then(response => response.json())
+    .then(data => {
+        $('#all-notes').html("<h4>Here are current Notes today:</h4>")
+      data.forEach 
+        (note => {
+          const newNote = new Note(note.id, note.note_title) //calling new on Note function 
+          const formattedNote = newNote.formatNotesIndex()
         $("#all-notes").append(formattedNote)
       })
     })
-  })
+    .catch(err => console.log(err))
+  });
+
 
   $(document).on("click", ".js-prev", function(e) {
     //document(top parent) is used for "future links" of .js-prev because the title links aren"t created yet
-     $("#app-container").html("")
+     $("#app-container").html("");
      //cleared app-container
-    const id = $(this).data("id") 
-    //grabbing id of the variable clicked which is defined on line 79
+    const id = $(this).data("id"); 
+    //grabbing id of the letiable clicked which is defined on line 79
       fetch(`/api/notes/${id}/prev`)
-       //fetch uses promises which is resolved using .then
+       //fetch uses promises .then to handle results/callbacks
       .then(res => res.json())
       //using the response to convert it to json which returns another promise. arrow => functions work same as callback functions
       .then(note => {
@@ -42,7 +60,7 @@ function bindClick() {
     history.pushState(null, null, `/notes/${id - 1}`)
     //pushstate takes 3 args, 3rd arg is the url that you want to update
   })
-}
+};
 
   $(document).on("click", ".js-next", function(e) {
      $("#app-container").html("")
@@ -52,12 +70,12 @@ function bindClick() {
       .then(note => {
         console.log(note)
         const newNote = new Note(note.id, note.note_title, note.note_content, note.comments, note.user)
-        const noteHTML = newNote.formatNotesShow()
+        const noteHtml = newNote.formatNotesShow()
         $("#app-container").append(noteHTML)
       })
       .catch(err => console.log(err))
     history.pushState(null, null, `/notes/${id + 1}`)
-  })
+  });
 
 // Note Constructor 
 function Note(id, title, content, comments, user) {
@@ -66,43 +84,32 @@ function Note(id, title, content, comments, user) {
   this.note_content = content 
   this.comments = comments
   this.user = user
-
-}
-
-// Comment.prototype.addComment = function(){
-//   console.log("inside notes.js")
-//   $("#comments_list").append("<p>" + this.created_at + " " + this.content + "</p> <hr>");
-//   $("#comment_content").val("");
-// }
+};
 
 // Note object function to view all notes
 Note.prototype.formatNotesIndex = function(){
-  var noteHtml = ""
-  noteHtml += 
-              ` 
-              
-              
+  let noteHtml = ""
+  noteHtml+= 
+              `  
               <div class="note">
               <p class="title"> 
               <a href= "/notes/${this.id}" class ="note-title" data-id=${this.id}> ${this.note_title}</a></p>
               <p class="delete">
               <a href="/notes/${this.id}/edit">Edit</a>
                <a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/notebooks/1">Delete</a>
-               </p>
-              
-              
+               </p> 
               </div>`
   // noteHtml += `<h4> ${this.note_content} </h4>`
   // noteHtml += `<h4> ${this.comments.length} </h4>`
   return noteHtml
-}
+};
 
 
 Note.prototype.formatNotesShow = function(){
   const comments = this.comments.map(comment => `<li>${comment.content}</li> <hr>`)
   //format the content of the comments
   console.log(comments.join(""))
-  var noteHtml = ``
+  let noteHtml = ``
   noteHtml =    ` 
                 <div class="wrapper_with_padding">
                   <div id="note_show">
@@ -130,11 +137,9 @@ Note.prototype.formatNotesShow = function(){
                     </ol>
                   </div>
                 </div>
-
   `
-
   return noteHtml
-}
+};
 
 // <h1>Title: ${this.note_title}</h1>
 //                   <p>Content: ${this.note_content} </p>
@@ -159,8 +164,8 @@ Note.prototype.formatNotesShow = function(){
 //     e.preventDefault();
 
 
-//     var values = $(this).serialize();
-//     var posting = $.post("/comments", values);
+//     let values = $(this).serialize();
+//     let posting = $.post("/comments", values);
 //     posting.done(function(data){
 //       console.log(data.created_at);
 //       comment = new Comment(data.content, data.created_at);

@@ -1,35 +1,23 @@
 <div class="wrapper_with_padding">
-  <div id="note_show">
-
-<div id ='all-notes'>
-  		<%unless @notes.blank? %>
-  		<% @notes.each do |note| %>
-    <h2><%=link_to note.note_title, note_path(note)%></h2>
-      
-
-
-      <div class= "buttons">
-      <%= link_to "Done", new_note_path, class: "button" %>
-      <%= link_to "Edit", edit_note_path(note), class: "button" %>
-
-      <%= link_to "Delete", note_path(note), method: :delete, data: { confirm: "Are you sure?" }, class: "button" %>
-
-      <%end%>
-      <%else%>
+ <div class="clearfix" id="notes">
+ <h4>Here are <%= current_user.email %> current Notes today:  </h4>
+  <%unless @notes.blank? %>
+  <% @notes.each do |note| %>
+  <div class="note">
+    <p class="title">   
+      <%=link_to note.note_title, note_path(note)%>     
+    </p>
+    <p class= "delete">
+      <%= link_to "Edit", edit_note_path(note) %>
+      <%= link_to "Delete", note_path(note), method: :delete, data: { confirm: "Are you sure?" } %></p>
+    </div>
+    <%end%>
+    <%else%>
     <h2>Add a Note!</h2>
     <p>It appears you haven't created any notes yet... Lets fix that. Why don't you go ahead and create a new note.</p>
     <button>
       <%= link_to "New Note", new_note_path %>
     </button>
     <% end %>
-
-
-
-
-
-  <h3> Click the button to view all the notes</h3>
-  <%= button_tag "view all notes", class: 'view-notes' %>
+  </div>
 </div>
-</div>
-
-

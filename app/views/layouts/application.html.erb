@@ -22,28 +22,13 @@
 
         <% if user_signed_in? %>
 
-
-        <div class="dropdown">
-          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"style="width:200px;color: #f5f5f5;background-color: #2B2E2E ;">
-
-
-
-            <span class="caret"></span> Notebooks
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="width:200px;background-color: #2B2E2E; z-index: 1">
-            <a href="#" class="" data-value=2><h4> <%= link_to "Create Notebook", new_notebook_path(@notebook) %></a></h4>
-            <a href="#" class="" data-value=2><h4> <%= link_to "All Notebooks", notebooks_path %></a></h4>
-            <li class="divider"></li>
-            <%  current_user.notebooks.all.each do |notebook| %>
-            
-            <li><%=link_to notebook.notebook_title, notebook_path(notebook)%></li>
-            <%end%> 
-          </ul>
+          </ul><h4>
+          <%= link_to "Notebooks", notebooks_path %>
           <%= link_to "Notes", notes_path %>
           <%= link_to "Profile", user_path(current_user) %>
           <%= link_to('Log Out', destroy_user_session_path, :method => :delete) %>
           <% else %>
-          <%= link_to "Log In", new_user_session_path %>
+          <%= link_to "Log In", new_user_session_path %></h4>
           <% end %>
         </nav>
       </div>
@@ -55,6 +40,7 @@
       <%= alert %>
     </p>
     <div id="app-container">
+    
     <%= yield %>
     </div>
   </body>

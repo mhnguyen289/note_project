@@ -30,7 +30,7 @@ class Note < ActiveRecord::Base
   	#   end
 
 	  def next
-	  	if next_note = self.class.where("id > ?", id).first
+	  	if next_note = self.class.where("id >  ? ", id).first
 	  		next_note
 	  	else
 	  		Note.first

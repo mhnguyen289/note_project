@@ -16,9 +16,10 @@ class NotesController < ApplicationController
 	end
 
 	def api_show
-		
+		# return json representation of that note
 		@note = Note.find_by_id(params[:id])
 		render json: @note
+		# active model serializers allows you to customize json output
 	end
 
 	def api_next 
@@ -47,12 +48,17 @@ class NotesController < ApplicationController
 	end
 
 	def new
-		@note = current_user.notes.build()
+		
+		@notebook = current_user.notebooks.find(params[:notebook_id])
+		@note = @notebook.notes.build()
+		# @note = current_user.notes.build()
 	end
 
 	def create
 		
-		@notebook = Notebook.find_by(params[:id])
+		@notebook = Notebook.find(params[:note][:notebook_id])
+		# @notebook = Notebook.find_by(params[:id])
+		# @notebook = Notebook.find_or_create_by(:notebook_title=>params[:note][:notebook_attributes])
 		@note = @notebook.notes.build(note_params)
 		@note.user = current_user
 		if @note.valid?
@@ -78,10 +84,10 @@ class NotesController < ApplicationController
 
 	def destroy
 		
-		note = Note.find(params[:id])
-		notebook = note.notebook
-		note.destroy
-		redirect_to notebook_path(notebook)
+		@note = Note.find(params[:id])
+		# @notebook = @note.notebook
+		@note.destroy
+		redirect_to notes_path
 	end
 
 	private

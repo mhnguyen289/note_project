@@ -1,4 +1,3 @@
-
 $(function(){
 
   $(document).on('submit', '#new_comment', function(e){
@@ -20,6 +19,7 @@ var Comment = function(content, created_at){
 };
 
 Comment.prototype.addComment = function(){
+  console.log('inside comments.js')
   $('#comments_list').append('<p>' + this.created_at + ' ' + this.content + '</p> <hr>');
   $('#comment_content').val('');
 }

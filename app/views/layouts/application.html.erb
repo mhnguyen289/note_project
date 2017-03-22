@@ -1,8 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <head>
-  <title>DOT.NOTE| Online Notebook Application</title>
+  <title>DOT.NOTE | Online Notebook Application</title>
 
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'application', media: 'all'%>
   <%= javascript_include_tag :application %>
   <%= csrf_meta_tags %>
 
@@ -23,9 +23,9 @@
         <% if user_signed_in? %>
 
           </ul><h4>
+          <%= link_to "Welcome, #{current_user.email}", user_path(current_user) %>
           <%= link_to "Notebooks", notebooks_path %>
           <%= link_to "Notes", notes_path %>
-          <%= link_to "Profile", user_path(current_user) %>
           <%= link_to('Log Out', destroy_user_session_path, :method => :delete) %>
           <% else %>
           <%= link_to "Log In", new_user_session_path %></h4>

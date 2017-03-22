@@ -1,7 +1,5 @@
 <div class="wrapper_with_padding">
   <div id="note_show">
-
-
    <h1><%=@note.note_title%></h1> 
       <p><%= @note.note_content%></p>
 
@@ -11,33 +9,26 @@
       <%= link_to "Edit", edit_note_path(@note), class: "button" %>
       <%= link_to "Delete", note_path(@note), method: :delete, data: { confirm: "Are you sure?" }, class: "button" %>
       <%= button_tag 'Next Note', class: 'js-next', data: {id: @note.id} %>
-
-  
     </div>
-  
-
-       <!-- link_to "load comments", note_comments_path(@note), :class => "load comments", :remote => true  -->
   </div>
-
-
 <hr>
  
-  <h2 id="status-list">Comments</h2>
+   <h2 id="status-list">Comments</h2>
 
      <%= form_for(@comment) do |f| %>
         <%= f.text_field :content %>
         <%= f.hidden_field :note_id, :value => @note.id %>
         <%= f.submit "comment here" %>
       <% end %>
-  
-  
-<div id="comments_list">
-    <ol> <% @note.comments.order("created_at desc").each do |comment| %>
-          <!-- comment.format_time  - -->
-          <li><%= comment.content %></li>
+
+<div>
+    <ol id= "comments_list"> <% @note.comments.each do |comment| %>
           <hr> 
+
+          <li><%= comment.content %></li>
+          
         <%end%>
     </ol>
-  </div>
+</div>
 
 

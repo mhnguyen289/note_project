@@ -2,7 +2,7 @@ class CommentsController < NotesController
 
   def create
     
-    @note = Note.find(params[:comment][:note_id])
+    @note = Note.find(params[:comment][:note_id]) #belongs to note
     # if current_user != @note.user
     #   redirect_to user_notes_path(current_user)
     # else

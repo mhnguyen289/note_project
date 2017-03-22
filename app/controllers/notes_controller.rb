@@ -3,8 +3,6 @@ class NotesController < ApplicationController
 
 
 	def index
-		
-
 		@notes = Note.all
 		# @notes = current_user.notes
 		# render json: @notes

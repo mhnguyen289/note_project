@@ -1,22 +1,44 @@
-//use strict:
-$(function() {
-  $(document).on("submit", "#new_comment", function(e){
+$(function(){
+
+  $(document).on('submit', '#new_comment', function(e){
     e.preventDefault();
+    // console.log(this)
     let values = $(this).serialize();
-    let posting = $.post("/comments", values);
+
+    let posting = $.post('/comments', values);
+    $('#comment_content').val('')
     posting.done(function(data){
-      comment = new Comment(data.content);
-      comment.addComment();
+
+      // console.log(data) = Object {id: 233, content: "the comment", user_id: null, note_id: 33, created_at: "2017-03-22T00:35:15.356Z"…}
+      const newComment = new Comment(data.content);
+      const addComment = newComment.addCommentList()
+      // console.log(addComment) = <hr><ol><li> ${this.content} </li></ol>
+      // comment.addComment();
+      // console.log(newComment) = Comment {content: "commnet 6"}
+      $("#comments_list").append(addComment)
     });
+    $('#new_comment').unbind('submit')
   });
 });
 
-const Comment = function(content){
+let Comment = function(content){
   this.content = content;
 };
 
-Comment.prototype.addComment = function(){
-  // console.log("inside comments.js")
-  $("#comments_list").append("<hr><li> ${this.content} </li> <hr>");
-  $("#comment_content").val("");
-}
+Comment.prototype.addCommentList = function(){
+  let commentHtml = ``
+  commentHtml+=
+  `
+   <hr><li> ${this.content} </li>
+  
+  `
+  return commentHtml
+};
+
+// const comments = this.map(comment => `<ol><li>${comment.content}</li><ol> <hr>`)
+//    <div id="comments_list">
+//                     <ol>
+//                       ${comments.join("")}
+//                     </ol>
+//                   </div>
+//                 </div>

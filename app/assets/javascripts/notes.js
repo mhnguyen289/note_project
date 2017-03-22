@@ -1,30 +1,17 @@
-$(function() {
+$(function() { //document ready function
   bindClick();
 });
 
 //ajax allows the application to request more info from server without locking the browser
 function bindClick() {
 
-  // $(document).on("click", ".view-notes", function(e){
-  //   // e.preventDefault();
-  //   // hijack the click event of view-notes link to fire ajax request
-  //   $.get("/api/notes",function(data){ //getting the array of objects from api/notes. Anon func will not fire until arr of obj is received. Using function callbacks 
-  //     $("#all-notes").html("<h4>Here are current Notes today:</h4>");
-  //     data.forEach(function(note){ 
-  //       let newNote = new Note(note.id,note.note_title); //calling new on Note function 
-  //       let formattedNote = newNote.formatNotesIndex();
-  //       $("#all-notes").append(formattedNote);
-  //     });
-  //   });
-  // });
-
-
-  $(document).on("click", ".view-notes", function(e){
-    e.preventDefault();
+  $(document).on("click", ".view-notes", function(e) { 
+  //hijacking or binding click event .on attaches event handlers to currently selected elements in jquery object
+    e.preventDefault(); //prevent browser from reloading instead do this next
    fetch(`/api/notes`)
-    .then(response => response.json())
+    .then(response => response.json())//implicit return
     .then(data => {
-        $('#all-notes').html("<h4>Here are current Notes today:</h4>")
+        $("#all-notes").html("<h4>Here are current Notes today:</h4>")
       data.forEach 
         (note => {
           const newNote = new Note(note.id, note.note_title) //calling new on Note function 
@@ -68,10 +55,10 @@ function bindClick() {
       fetch(`/api/notes/${id}/next`)
       .then(res => res.json())
       .then(note => {
-        console.log(note)
+        
         const newNote = new Note(note.id, note.note_title, note.note_content, note.comments, note.user)
         const noteHtml = newNote.formatNotesShow()
-        $("#app-container").append(noteHTML)
+        $("#app-container").append(noteHtml)
       })
       .catch(err => console.log(err))
     history.pushState(null, null, `/notes/${id + 1}`)
@@ -89,7 +76,7 @@ function Note(id, title, content, comments, user) {
 // Note object function to view all notes
 Note.prototype.formatNotesIndex = function(){
   let noteHtml = ""
-  noteHtml+= 
+  noteHtml += 
               `  
               <div class="note">
               <p class="title"> 
@@ -98,9 +85,8 @@ Note.prototype.formatNotesIndex = function(){
               <a href="/notes/${this.id}/edit">Edit</a>
                <a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/notebooks/1">Delete</a>
                </p> 
-              </div>`
-  // noteHtml += `<h4> ${this.note_content} </h4>`
-  // noteHtml += `<h4> ${this.comments.length} </h4>`
+              </div>
+              `
   return noteHtml
 };
 
@@ -115,7 +101,6 @@ Note.prototype.formatNotesShow = function(){
                   <div id="note_show">
                     <h1>Title: ${this.note_title}</h1>
                     <p>Content: ${this.note_content} </p>
-
                   <div class="buttons">
                     <button name="button" type="submit" class="js-prev" data-id="${this.id}">Previous Note</button>
                      <a class="button" href="/notes/${this.id}/edit">Edit</a>
@@ -131,65 +116,31 @@ Note.prototype.formatNotesShow = function(){
                   <input type="submit" name="commit" value="Create Comment" data-disable-with="Create Comment">
                   </form>
 
-                  <div id="comments_list">
-                    <ol>
+                  
+                    <ol id="comments_list">
+
                       ${comments.join("")}
                     </ol>
-                  </div>
                 </div>
   `
   return noteHtml
 };
+ // $(document).on("click", ".view-notes", function(e){
+  //   // e.preventDefault();
+  //   // hijack the click event of view-notes link to fire ajax request
+  //   $.get("/api/notes",function(data){ //getting the array of objects from api/notes. Anon func will not fire until arr of obj is received. Using function callbacks 
+  //     $("#all-notes").html("<h4>Here are current Notes today:</h4>");
+  //     data.forEach(function(note){ 
+  //       let newNote = new Note(note.id,note.note_title); //calling new on Note function 
+  //       let formattedNote = newNote.formatNotesIndex();
+  //       $("#all-notes").append(formattedNote);
+  //     });
+  //   });
+  // });
 
-// <h1>Title: ${this.note_title}</h1>
-//                   <p>Content: ${this.note_content} </p>
-
-//                   <div class="buttons">
-//                     <button name="button" type="submit" class="js-prev" data-id="${this.id}">Previous Note</button>
-//                     <a class="button" href="/notes/${this.id}/edit">Edit</a>
-//                     <a class="button" href="/notes/new">Done</a>
-//                     <a data-confirm="Are you sure?" class="button" rel="nofollow" data-method="delete" href="/notes/${this.id}">Delete</a>
-//                     <button name="button" type="submit" class="js-next" data-id="${this.id}">Next Note</button>
-//                   </div>
-// <form class="new_comment" id="new_comment" action="/comments" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="xuLYlgLsNqyZDQIivpLQdZwA/EMeZT4ZLOSWkDCO7xLcK3WWml8i6ntK5HVP5e0/Gtl3seG6hYH6DdfOmPqPAQ==">
-//                   <h4 id=status-list> Comments </h4>
-//                   <input type="text" name="comment[content]" id="comment_content">
-//                   <input value="${this.id}" type="hidden" name="comment[note_id]" id="comment_note_id">
-//                   <input type="submit" name="commit" value="Create Comment" data-disable-with="Create Comment">
-//                   </form>
-
-
-// $(function(){
-//   $(document).on("submit", ".new_comment" function(e){
-//     e.preventDefault();
-
-
-//     let values = $(this).serialize();
-//     let posting = $.post("/comments", values);
-//     posting.done(function(data){
-//       console.log(data.created_at);
-//       comment = new Comment(data.content, data.created_at);
-//       comment.addComment();
-//     });
-//   });
-// });
-
-
-
-// Comment.prototype.addComment = function(){
-//   $("#comments_list").append("<p>" + this.created_at + " " + this.content + "</p> <hr>");
-//   $("#comment_content").val("");
-
-// <h4 id="status-list">Comments</h4>
-//   <%= form_for(@comment) do |f| %>
-//     <%= f.text_field :content %>
-//     <%= f.hidden_field :note_id, :value => @note.id %>
-//     <%= f.submit %>
-//   <% end %>
-
-// //  <h4 id="status-list">Comments</h4> 
-//  <form class="new_comment" id="new_comment" action="/comments" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="xuLYlgLsNqyZDQIivpLQdZwA/EMeZT4ZLOSWkDCO7xLcK3WWml8i6ntK5HVP5e0/Gtl3seG6hYH6DdfOmPqPAQ==">
-//  <input type="text" name="comment[content]" id="comment_content">
-//  <input value="${this.id}" type="hidden" name="comment[note_id]" id="comment_note_id">
-//  <input type="submit" name="commit" value="Create Comment" data-disable-with="Create Comment">
-//  </form>
+                // <div id="comments_list">
+                //      <ol>
+                //        ${comments.join("")}
+                //      </ol>
+                //    </div>
+                //  </div>

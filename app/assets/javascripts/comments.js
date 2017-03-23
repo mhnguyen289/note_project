@@ -1,13 +1,13 @@
 $(function(){
+  $('[data-disable-with]').removeAttr('data-disable-with') //removes data-disable-with bc rails 5 adds it to form and does not allow to cont to add comments
 
-  $(document).on('submit', '#new_comment', function(e){
+  $(document).on("submit", "#new_comment", function(e){
     e.preventDefault();
     // console.log(this)
     let values = $(this).serialize();
-
-    let posting = $.post('/comments', values);
-    $('#comment_content').val('')
-    posting.done(function(data){
+    let posting = $.post("/comments", values);
+    $("#comment_content").val("")
+    posting.done(function(data){ //
 
       // console.log(data) = Object {id: 233, content: "the comment", user_id: null, note_id: 33, created_at: "2017-03-22T00:35:15.356Z"…}
       const newComment = new Comment(data.content);
@@ -16,8 +16,8 @@ $(function(){
       // comment.addComment();
       // console.log(newComment) = Comment {content: "commnet 6"}
       $("#comments_list").append(addComment)
+      $("#new_comment").unbind("submit")
     });
-    $('#new_comment').unbind('submit')
   });
 });
 
@@ -29,7 +29,10 @@ Comment.prototype.addCommentList = function(){
   let commentHtml = ``
   commentHtml+=
   `
-   <hr><li> ${this.content} </li>
+   <hr><li> ${this.content}
+   
+
+   </li>
   
   `
   return commentHtml
@@ -42,3 +45,4 @@ Comment.prototype.addCommentList = function(){
 //                     </ol>
 //                   </div>
 //                 </div>
+

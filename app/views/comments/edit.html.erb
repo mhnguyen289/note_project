@@ -1,0 +1,12 @@
+<div class="wrapper_with_padding">
+	<h1> Edit Comment</h1>
+     <%= form_for @comment do |f| %>
+     
+        <%= f.text_field :content %>
+        <%= f.hidden_field :note_id, :value => @comment.note_id %>
+        <%= f.submit "comment here" %>
+      <% end %>
+
+	
+	
+</div>

@@ -12,13 +12,17 @@ end
   get 'api/notes/:id/prev', to: 'notes#api_prev'
 
   
-  resources :users 
-  resources :notes
-  resources :comments, only: [:show, :new, :create]
+  
+  resources :notes do
+    resources :comments
+  end
   resources :notebooks do
     resources :notes
   end
   
+  resources :users 
+  resources :notes
+  resources :comments
   
   authenticated :user do
   	root 'notebooks#index', as: "authenticated_root"

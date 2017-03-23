@@ -92,9 +92,14 @@ Note.prototype.formatNotesIndex = function(){
 
 
 Note.prototype.formatNotesShow = function(){
-  const comments = this.comments.map(comment => `<li>${comment.content}</li> <hr>`)
+  const comments = this.comments.map(comment => 
+    `<hr><li>${comment.content}
+    <p id="comment_buttons">
+      <a href="/comments/${this.id}/edit">Edit</a>
+      <a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/comments/${this.id}">Delete</a> 
+    </p> </li>`)
   //format the content of the comments
-  console.log(comments.join(""))
+  // console.log(comments.join(""))
   let noteHtml = ``
   noteHtml =    ` 
                 <div class="wrapper_with_padding">
@@ -113,10 +118,9 @@ Note.prototype.formatNotesShow = function(){
                     <h2 id=status-list> Comments </h2>
                   <input type="text" name="comment[content]" id="comment_content">
                   <input value="${this.id}" type="hidden" name="comment[note_id]" id="comment_note_id">
-                  <input type="submit" name="commit" value="Create Comment" data-disable-with="Create Comment">
+                  <input type="submit" name="commit" value="Create Comment">
                   </form>
 
-                  
                     <ol id="comments_list">
 
                       ${comments.join("")}

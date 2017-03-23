@@ -13,19 +13,24 @@
   </div>
 <hr>
  
-   <h2 id="status-list">Comments</h2>
+  <div class"status-list">
+    <h2>Comments:</h2>
+    <%= render 'comments/form' %>
+  </div>
 
-     <%= form_for(@comment) do |f| %>
-        <%= f.text_field :content %>
-        <%= f.hidden_field :note_id, :value => @note.id %>
-        <%= f.submit "comment here" %>
-      <% end %>
 
 <div>
     <ol id= "comments_list"> <% @note.comments.each do |comment| %>
           <hr> 
 
-          <li><%= comment.content %></li>
+          <li><%= comment.content %>
+                
+
+              <p id= "comment_buttons"><%=link_to "Edit", edit_comment_path(comment) %>
+              
+              <%= link_to "Delete", comment_path(comment), method: :delete,data: {confirm: "Are you sure?"} %> 
+          </p>
+          </li>
           
         <%end%>
     </ol>

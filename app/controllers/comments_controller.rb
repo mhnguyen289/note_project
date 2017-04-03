@@ -11,6 +11,8 @@ class CommentsController < ApplicationController
     # end
   end
 
+  
+
   def edit
     @comment = Comment.find(params[:id])
   end
@@ -21,12 +23,12 @@ class CommentsController < ApplicationController
     comment = Comment.find(params[:id])
     comment.update(comment_params)
     
-    redirect_to note_path(note)
+    redirect_to note_path(@note)
   end
 
   def destroy
 
-    # @note = Note.find(@comment.note_by_id)
+    
     @comment = Comment.find(params[:id])
     @comment.destroy
     redirect_to note_path(@comment.note_id)

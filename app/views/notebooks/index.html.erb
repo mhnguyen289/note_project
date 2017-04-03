@@ -12,10 +12,11 @@
            <%=link_to notebook.notebook_title, notebook_path(notebook)%>
          </p> 
 
-         <p class= "delete">
-         <%=link_to "Edit", edit_notebook_path(notebook)  %>
-           <%= link_to "Delete", notebook_path(notebook), method: :delete, data: { confirm: "Are you sure?" } %>
-         </p>
+         
+          <div id= 'all-notebooks'> = <%=link_to "Edit", edit_notebook_path(notebook)  %>
+           
+           <%= button_tag 'Delete', class: 'delete_notebook', method: :delete, data: {id: notebook.id} %>
+           </div>
        </div>
        <%end%>
        <%else%>
@@ -33,9 +34,10 @@
     <div class="clearfix" id="notes">
 
       <div id ='all-notes'>
-        <h3> Click the button to view all the notes</h3>
+        <h3> Click to view all the notes</h3>
         <%= button_tag "view all posts", class: 'view-notes' %>
 
       </div>
 
     </div>
+

@@ -3,14 +3,31 @@ class NotebooksController < ApplicationController
 	before_action :find_notebook, only: [:index, :show, :edit, :update, :destroy]
 
 	def index
-		@notebooks = current_user.notebooks
+		
+		@notebooks = Notebook.all
 		@notebook = Notebook.find_by(params[:id])
+		# render json: @notebook
 
 	end
 
+	def api_index
+		
+		@notebooks = current_user.notebooks
+		@notebook = Notebook.find_by(params[:id])
+		render json: @notebooks
+	end
+
+	def api_show
+		
+		@notebook = Notebook.find_by_id(params[:id])
+		render json: @notebook
+	end
+
 	def show
+		
 		@notebooks = Notebook.all
 	   @notebook = Notebook.find(params[:id])
+	   render json: @notebook
 	end
 
 
@@ -44,9 +61,10 @@ class NotebooksController < ApplicationController
 	end
 
 	def destroy
-		notebook = Notebook.find(params[:id])
-		notebook.destroy
-		render :index
+		binding.pry
+		@notebook = Notebook.find(params[:id])
+		@notebook.destroy
+		render :api_show
 	end
 
 	

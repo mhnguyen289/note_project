@@ -10,7 +10,9 @@ class Notebook < ActiveRecord::Base
 
 
 
-
+def self.all_by_user(user_id)
+    all.where('user_id = ?', user_id)
+  end
 # def note_attributes=(note_attributes)
 	
 #     self.notebook = Note.find_or_create_by(title:notebook_attributes[:title]) unless self.note_id

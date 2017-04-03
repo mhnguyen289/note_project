@@ -5,7 +5,7 @@
 
 <div class= "buttons">
       <%= button_tag 'Previous Note', class: 'js-prev', data: {id: @note.id} %>
-      <%= link_to "Done", new_note_path, class: "button" %>
+      <%= link_to "Done", notebook_path, class: "button" %>
       <%= link_to "Edit", edit_note_path(@note), class: "button" %>
       <%= link_to "Delete", note_path(@note), method: :delete, data: { confirm: "Are you sure?" }, class: "button" %>
       <%= button_tag 'Next Note', class: 'js-next', data: {id: @note.id} %>

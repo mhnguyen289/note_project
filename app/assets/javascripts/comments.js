@@ -30,19 +30,25 @@ Comment.prototype.addCommentList = function(){
   commentHtml+=
   `
    <hr><li> ${this.content}
-   
-
+   <p id="comment_buttons">
+      <a href="/comments/${this.id}/edit">Edit</a>
+      <a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/comments/${this.id}">Delete</a> 
+    </p>
    </li>
   
   `
   return commentHtml
 };
 
-// const comments = this.map(comment => `<ol><li>${comment.content}</li><ol> <hr>`)
-//    <div id="comments_list">
-//                     <ol>
-//                       ${comments.join("")}
-//                     </ol>
-//                   </div>
-//                 </div>
+// const newComment = new Comment(data.content);
+// const addComment = newComment.addCommentList()
+
+// fetch("/comments", {
+//       method: 'post',
+//       headers:{
+//         $(this).serialize();
+
+        
+//       }
+//     })
 

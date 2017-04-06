@@ -1,7 +1,6 @@
 class NotesController < ApplicationController
-	before_action :find_note, only: [:show, :edit, :destroy, :update, :api_show]
+	before_action :find_note, only: [:show, :edit, :destroy, :update, :api_show, :api_next, :api_prev]
 	
-
 	def index
 		@notes = Note.all
 	end
@@ -9,34 +8,29 @@ class NotesController < ApplicationController
 	def api_index
 		@notes = Note.all
 		render json: @notes
-		
-	end
-
-	def api_show
-		@note = Note.find_by_id(params[:id])
-		render json: @note
 	end
 
 	def api_next 
-		@note = Note.find_by_id(params[:id])
 		@next_note = @note.next
 		render json: @next_note
 	end
 
 	def api_prev 
-		@note = Note.find_by_id(params[:id])
 		@prev_note = @note.previous
 		render json: @prev_note
 	end
 
 	def show		
 		@notebooks = current_user.notebooks.all
-		@note = Note.find(params[:id])
 		@comment = Comment.new
 		respond_to do |f|
 			f.html {render :show }
 			f.json {render json: @note }
 		end
+	end
+
+	def api_show
+		render json: @note
 	end
 
 	def new		
@@ -58,7 +52,6 @@ class NotesController < ApplicationController
 
 	def edit
 		@notebooks = current_user.notebooks.all
-		@note = Note.find(params[:id])
 	end
 
 	def update
@@ -70,7 +63,6 @@ class NotesController < ApplicationController
 	end
 
 	def destroy
-		binding.pry		
 		@note = Note.find(params[:id])
 		# @notebook = @note.notebook
 		@note.destroy

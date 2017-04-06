@@ -1,43 +1,33 @@
 class NotebooksController < ApplicationController
 
-	before_action :find_notebook, only: [:index, :show, :edit, :update, :destroy]
+	before_action :find_notebook, only: [:index, :show, :edit, :update, :destroy, :api_show]
 
-	def index
-		
+	def index		
 		@notebooks = Notebook.all
-		@notebook = Notebook.find_by(params[:id])
-		# render json: @notebook
-
+		@notes = Note.all
 	end
 
 	def api_index
-		
-		@notebooks = current_user.notebooks
-		@notebook = Notebook.find_by(params[:id])
+		@notebooks = Notebook.all
 		render json: @notebooks
 	end
 
 	def api_show
-		
-		@notebook = Notebook.find_by_id(params[:id])
+		@notebook = Notebook.find(params[:id])
 		render json: @notebook
 	end
 
 	def show
-		
 		@notebooks = Notebook.all
+		@note = Notebook.find_by(params[:id])
 	   @notebook = Notebook.find(params[:id])
-	   render json: @notebook
 	end
-
 
 	def new
 		@notebook = Notebook.new
-		# @notebooks = Notebook.all
 	end
 
 	def create
-		
 		@notebook = current_user.notebooks.create(notebook_params)
 		if @notebook.valid?
 			@notebook.save
@@ -61,7 +51,6 @@ class NotebooksController < ApplicationController
 	end
 
 	def destroy
-		binding.pry
 		@notebook = Notebook.find(params[:id])
 		@notebook.destroy
 		render :api_show
@@ -75,7 +64,7 @@ private
 	end
 
 	def find_notebook
-		@notebook = Notebook.where(params[:id])
+		@notebook = Notebook.find_by_id(params[:id])
 	end	
 end
 

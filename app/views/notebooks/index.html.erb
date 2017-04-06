@@ -1,43 +1,40 @@
-    <div class="wrapper_with_padding">
-      <div class="clearfix" id="notes">
 
+<div class="wrapper_with_padding">
+  <div class="clearfix" id="notebooks">
 
-        <%unless @notebooks.blank? %>
-        <h4>Here are <%= current_user.email %> current Notebooks today:  </h4>
+    <%unless @notebooks.blank? %>
+    <h4>Here are <%= current_user.email %> current Notebooks today:  </h4>
 
-        <% @notebooks.each do |notebook| %>
-        <div class="note">
-          <p class="title">   
+    <% @notebooks.each do |notebook| %>
+    <div class="notebook">
+      <p class="title">   
+       <%=link_to notebook.notebook_title, notebook_path(notebook)%>
+     </p> 
+     <p class= "delete">
+       <%=link_to "Edit", edit_notebook_path(notebook)  %>
+       <%= link_to "Delete", notebook_path(notebook), method: :delete, data: { confirm: "Are you sure?" } %>
+     </p>
+   </div>
+   <%end%>
+   <%else%>
+   <h2>Add a Notebook!</h2>
+   <p>It appears you haven't created any notes yet... Lets fix that. Why don't you go ahead and create a new note.</p>
+   <% end %>
+ </div>
+ <button> <%= link_to "New Notebook", new_notebook_path %></button><hr>
 
-           <%=link_to notebook.notebook_title, notebook_path(notebook)%>
-         </p> 
+ <div id ='all-notes'>
+  <h4> Click the button to view all the notes</h4>
+  <%= button_tag "view all posts", class: 'view-notes' %>
+</div>
+</div>
 
-         
-          <div id= 'all-notebooks'> = <%=link_to "Edit", edit_notebook_path(notebook)  %>
-           
-           <%= button_tag 'Delete', class: 'delete_notebook', method: :delete, data: {id: notebook.id} %>
-           </div>
-       </div>
-       <%end%>
-       <%else%>
-       <h2>Add a Notebook!</h2>
-       <p>It appears you haven't created any notes yet... Lets fix that. Why don't you go ahead and create a new note.</p>
-       <button>
-        <%= link_to "New Notebook", new_notebook_path %>
-      </button>
-      <% end %>
-
-
-
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
     </div>
-    
-    <div class="clearfix" id="notes">
+  </div>
+</div>
 
-      <div id ='all-notes'>
-        <h3> Click to view all the notes</h3>
-        <%= button_tag "view all posts", class: 'view-notes' %>
 
-      </div>
-
-    </div>
 

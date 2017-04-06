@@ -5,16 +5,16 @@
 
 <div class= "buttons">
       <%= button_tag 'Previous Note', class: 'js-prev', data: {id: @note.id} %>
-      <%= link_to "Done", notebook_path, class: "button" %>
+      <%= link_to "Done", notes_path, class: "button" %>
       <%= link_to "Edit", edit_note_path(@note), class: "button" %>
       <%= link_to "Delete", note_path(@note), method: :delete, data: { confirm: "Are you sure?" }, class: "button" %>
       <%= button_tag 'Next Note', class: 'js-next', data: {id: @note.id} %>
     </div>
   </div>
-<hr>
+
  
   <div class"status-list">
-    <h2>Comments:</h2>
+    <h2>Comments</h2>
     <%= render 'comments/form' %>
   </div>
 
@@ -22,10 +22,7 @@
 <div>
     <ol id= "comments_list"> <% @note.comments.each do |comment| %>
           <hr> 
-
           <li><%= comment.content %>
-                
-
               <p id= "comment_buttons"><%=link_to "Edit", edit_comment_path(comment) %>
               
               <%= link_to "Delete", comment_path(comment), method: :delete,data: {confirm: "Are you sure?"} %> 
@@ -35,5 +32,7 @@
         <%end%>
     </ol>
 </div>
+
+
 
 

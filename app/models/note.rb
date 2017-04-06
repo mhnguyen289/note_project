@@ -4,14 +4,10 @@ class Note < ActiveRecord::Base
 	# has_one :note_notebook
 	belongs_to :notebook
 	has_many :comments
+	validates_presence_of :note_title, :note_content
 	# validates_presence_of :title, :notebook_id
 	# validates_uniqueness_of :title
-
-
 	  # accepts_nested_attributes_for :notebook
-
-
-
 
 	  def notebook_titles=(notebook_titles)
 	  	self.notebook = Notebook.find_or_create_by(notebook_title: notebook_title)
@@ -24,10 +20,6 @@ class Note < ActiveRecord::Base
 	  	end
 	  	@titles
 	  end    
-
-	  # def next
-   #  	self.where("id > ?", id).first
-  	#   end
 
 	  def next
 	  	if next_note = self.class.where("id >  ? ", id).first

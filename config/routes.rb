@@ -12,8 +12,6 @@ end
   # route defined to have api info go to specific parameter
   get 'api/notes/:id/next', to: 'notes#api_next'
   get 'api/notes/:id/prev', to: 'notes#api_prev'
-
-  
   
   resources :notes do
     resources :comments

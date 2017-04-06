@@ -3,9 +3,7 @@
 	
 	<%= form_for @note do |f| %>
 	<%= f.text_field :note_title%>
-	<%= f.text_field :note_content%>
-	
-
-	<%= f.submit %>
+	<%= f.text_area :note_content%>
+	<%= f.submit class:"button" %>
 	<% end %>
 </div>

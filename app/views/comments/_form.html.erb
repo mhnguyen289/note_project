@@ -1,6 +1,5 @@
-
-     <%= form_for @comment do |f| %>
-        <%= f.text_field :content %>
-        <%= f.hidden_field :note_id, :value => @note.id, class: "note_id" %>
-        <%= f.submit "comment here" %>
-      <% end %>
+<%= form_for @comment do |f| %>
+   <%= f.text_field :content %>
+   <%= f.hidden_field :note_id, :value => @note.id, class: "note_id" %>
+   <%= f.submit "Comment here" %>
+<% end %>

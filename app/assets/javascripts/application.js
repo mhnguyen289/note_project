@@ -15,4 +15,5 @@
 //= require bootstrap-sprockets
 //= bootstrap-sprockets
 //= require_tree .
+//= require bootstrap/modal
 

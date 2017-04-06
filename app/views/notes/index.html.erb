@@ -3,12 +3,11 @@
  <h4>Here are <%= current_user.email %> current Notes today:  </h4>
   <%unless @notes.blank? %>
   <% @notes.each do |note| %>
-  <div class="note">
+  <div class="note" data-toggle="modal" data-target="#myModal" data-id ="<%=note.id%>">
     <p class="title">   
-      <%=link_to note.note_title, note_path(note)%>     
+      <%= note.note_title %>
     </p>
     <p class= "delete">
-      <%= link_to "Edit", edit_note_path(note) %>
       <%= link_to "Delete", note_path(note), method: :delete, data: { confirm: "Are you sure?" } %></p>
     </div>
     <%end%>
@@ -21,3 +20,13 @@
     <% end %>
   </div>
 </div>
+
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      </div>
+    </div>
+  </div>
+</div>
+
+  

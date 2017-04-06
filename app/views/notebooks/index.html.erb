@@ -6,14 +6,16 @@
     <h4>Here are <%= current_user.email %> current Notebooks today:  </h4>
 
     <% @notebooks.each do |notebook| %>
-    <div class="notebook">
+    <div class="notebook" data-toggle="modal" data-target="#myModal" data-id ="<%=notebook.id%>">
+    <div class="note">
       <p class="title">   
-       <%=link_to notebook.notebook_title, notebook_path(notebook)%>
+       <%=notebook.notebook_title%>
      </p> 
      <p class= "delete">
        <%=link_to "Edit", edit_notebook_path(notebook)  %>
        <%= link_to "Delete", notebook_path(notebook), method: :delete, data: { confirm: "Are you sure?" } %>
      </p>
+     </div>
    </div>
    <%end%>
    <%else%>

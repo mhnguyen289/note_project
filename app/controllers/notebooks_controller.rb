@@ -7,20 +7,10 @@ class NotebooksController < ApplicationController
 		@notes = Note.all
 	end
 
-	def api_index
-		@notebooks = Notebook.all
-		render json: @notebooks
-	end
-
-	def api_show
-		@notebook = Notebook.find(params[:id])
-		render json: @notebook
-	end
-
 	def show
-		@notebooks = Notebook.all
-		@note = Notebook.find_by(params[:id])
-	   @notebook = Notebook.find(params[:id])
+		
+	   @notebook = Notebook.find_by(id: params[:id])
+	   render json: @notebook
 	end
 
 	def new
